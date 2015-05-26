@@ -1,0 +1,29 @@
+{
+  "name": "react-boilerplate",
+  "version": "0.0.1",
+  "author": "Ziad Saab <ziad.saab@gmail.com>",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "devDependencies": {
+    "babel-core": "^4.7.16",
+    "babel-loader": "^4.2.0",
+    "exports-loader": "^0.6.2",
+    "grunt": "^0.4.2",
+    "grunt-concurrent": "^0.5.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^0.18.1",
+    "grunt-webpack": "^1.0.8",
+    "jquery": "^1.11.1",
+    "jsx-loader": "^0.13.1",
+    "lodash": "^2.4.1",
+    "react": "^0.13.0",
+    "react-hot-loader": "^1.2.2",
+    "react-router": "^0.13.0",
+    "script-loader": "^0.6.0",
+    "webpack": "^1.7.2",
+    "webpack-dev-server": "^1.7.0"
+  }
+}
