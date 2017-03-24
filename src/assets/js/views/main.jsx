@@ -41,9 +41,17 @@ var MainView = React.createClass({
   },
   render: function () {
     return (
-      <ul className={this.state.loading ? 'loading-container' : ''}>
-        {this.state.lipsum.map(this.renderLipsum)}
-      </ul>
+      <div>
+        <div className="col-md-4">
+
+        </div>
+
+        <div className="col-md-8">
+          <div id="googleMap" style={{width:800,height:"600px"}}>
+          </div>
+        </div>
+
+      </div>
     );
   },
   renderLipsum: function(lipsumItem, itemNumber) {

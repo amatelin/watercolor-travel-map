@@ -19,11 +19,15 @@
     "jquery": "^1.11.1",
     "jsx-loader": "^0.13.1",
     "lodash": "^2.4.1",
+    "node-gyp": "^3.6.0",
     "react": "^0.13.0",
     "react-hot-loader": "^1.2.2",
     "react-router": "^0.13.0",
     "script-loader": "^0.6.0",
     "webpack": "^1.7.2",
     "webpack-dev-server": "^1.7.0"
+  },
+  "dependencies": {
+    "node-sass": "^4.5.1"
   }
 }
