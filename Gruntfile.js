@@ -43,7 +43,7 @@ module.exports = function(grunt) {
                 options: {
                     logConcurrentOutput: true
                 },
-                tasks: ['watch:sass', 'webpack-dev-server:start']
+                tasks: ['copy:dev', 'watch:sass', 'webpack-dev-server:start']
             }
         },
         webpack: {
@@ -114,6 +114,19 @@ module.exports = function(grunt) {
             }
         },
         copy: {
+            dev: {
+              files: [
+                {
+                   expand: true,
+                   filter: 'isFile',
+                   flatten: true,
+                   cwd: 'src/assets/scss/bootstrap',
+                   src: ['assets/fonts/**'],
+                   dest: 'src/assets/fonts/bootstrap'
+
+                 }
+              ]
+            },
             dist: {
                 expand: true,
                 cwd: 'src/',
@@ -122,7 +135,8 @@ module.exports = function(grunt) {
                     '!assets/.sass-cache/',
                     '!assets/css/**',
                     '!assets/scss/**',
-                    '!assets/js/**'
+                    '!assets/js/**',
+                    '!assets/fonts/**'
                 ],
                 dest: 'dist/'
             }

@@ -13,7 +13,13 @@ var DownloadForm = React.createClass({
 
   render: function() {
     return (
-      <div></div>
+      <div className='col-md-12'>
+        <div className='col-md-6 col-md-offset-3'>
+          <button type='button' className='btn btn-primary btn-block' onClick={this.props.onClickPrevious}>
+            Previous step
+          </button>
+        </div>
+      </div>
     );
   }
 });

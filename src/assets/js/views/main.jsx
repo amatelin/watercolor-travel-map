@@ -43,15 +43,16 @@ var MainView = React.createClass({
       case 0:
         console.log("first form");
         return (
-          <SetRoutesForm onLoad={this.onFormComponentLoad} />
+          <SetRoutesForm onLoad={this.onFormComponentLoad} onClickNext={this.onClickNext}/>
         );
       case 1:
         return (
-          <SetParametersForm onLoad={this.onFormComponentLoad} />
+          <SetParametersForm onLoad={this.onFormComponentLoad} onClickNext={this.onClickNext}
+            onClickPrevious={this.onClickPrevious}/>
         );
       case 2:
         return (
-          <DownloadForm onLoad={this.onFormComponentLoad} />
+          <DownloadForm onLoad={this.onFormComponentLoad} onClickPrevious={this.onClickPrevious}/>
         );
     }
   },
@@ -62,19 +63,18 @@ var MainView = React.createClass({
 
   render: function () {
     return (
-      <div className="row">
-        <div className="col-md-4">
-          <div className="col-md-12">
+      <div className='row'>
+        <div className='col-md-4'>
+          <div className='col-md-12'>
             <h2>{this.state.formComponentTitle}</h2>
           </div>
-          <div className="col-md-12">
+          <div className='col-md-12'>
             {this.renderFormComponent()}
           </div>
-          <div className="button" onClick={this.onClickNext}>Click Me!</div>
         </div>
 
-        <div className="col-md-8">
-          <div id="googleMap" style={{width:800,height:"600px"}}>
+        <div className='col-md-8'>
+          <div id='googleMap' className='iframe-container'>
           </div>
         </div>
 
