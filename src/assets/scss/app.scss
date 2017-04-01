@@ -68,3 +68,15 @@ html {
     height: 100%;
     width: 100%;
 }
+
+
+// Used to align cols vertically with the other children
+.vertical-align-end {
+    display: flex;
+    align-items: end;
+}
+
+.vertical-align-middle {
+    display: flex;
+    align-items: center;
+}

@@ -1,7 +1,16 @@
 var React = require('react');
-var Router = require('react-router');
+var ReactDOM = require('react-dom');
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 var routes = require('./routes');
+var AppView = require('./views/AppView');
+var ReactDom = require('react-dom');
 
-Router.run(routes, function(Handler) {
-    React.render(<Handler/>, document.getElementById('app'));
-});
+ReactDOM.render(
+  <Router>
+  {routes}
+  </Router>,
+  document.getElementById('app')
+)

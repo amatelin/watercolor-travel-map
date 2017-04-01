@@ -1,15 +1,16 @@
 var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 var DefaultRoute = Router.DefaultRoute;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 
-var MainView = require('./views/main');
+var AppView = require('./containers/AppContainer');
 
 var routes = (
-    <Route path="/">
-      <DefaultRoute name="main" handler={MainView}/>
+    <Route path="/" component={AppView}>
     </Route>
 );
 
