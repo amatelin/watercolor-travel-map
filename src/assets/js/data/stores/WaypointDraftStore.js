@@ -2,7 +2,7 @@
 
 import Dispatcher from '../dispatcher/Dispatcher';
 import ActionTypes from '../constants/ActionTypes';
-import WaypointStore from '../stores/WaypointStore'
+import WaypointStore from '../stores/WaypointStore';
 import {ReduceStore} from 'flux/utils'
 
 class RouteDraftStore extends ReduceStore {
@@ -19,17 +19,25 @@ class RouteDraftStore extends ReduceStore {
       case ActionTypes.OPEN_WAYPOINT_DRAFT:
         return {
           routeId: action.routeId,
-          address: ''
+          address: '',
+          validationError: null
         };
       case ActionTypes.CLOSE_WAYPOINT_DRAFT:
         return false;
       case ActionTypes.UPDATE_WAYPOINT_DRAFT:
         return {
           routeId: state.routeId,
-          address: action.address
+          address: action.address,
+          validationError: null
         }
       case ActionTypes.ADD_WAYPOINT:
-        // Dispatcher.waitFor([RouteStore.getDispatchToken()]);
+        Dispatcher.waitFor([WaypointStore.getDispatchToken()]);
+        if (!action.validationError) return false;
+        else return {
+          address: state.address,
+          routeId: state.routeId,
+          validationError: action.validationError
+        }
         return false;
       default:
         return state;

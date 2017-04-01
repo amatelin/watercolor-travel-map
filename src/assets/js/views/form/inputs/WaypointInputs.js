@@ -5,9 +5,7 @@ import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-boot
 import Counter from '../../../utils/Counter'
 
 function NewWaypointInput(props) {
-  console.log(props)
-  var {route} = props;
-  var draft = props.draft;
+  var {route, draft} = props;
   var addressInput = {};
   const onChange = (event) => props.onUpdateWaypointDraft(addressInput.value);
   const onAddWaypoint = () => props.onAddWaypoint(route.id, addressInput.value);
@@ -17,7 +15,8 @@ function NewWaypointInput(props) {
     <div>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
-          <FormGroup controlId="waypointInput">
+          <FormGroup controlId="waypointInput"
+            validationState={props.draft.validationError}>
             <ControlLabel>Waypoint address</ControlLabel>
             <FormControl  inputRef={(ref) => {addressInput = ref}} onChange={onChange}  value={draft.address} type='text'></FormControl>
           </FormGroup>
@@ -34,14 +33,17 @@ function NewWaypointInput(props) {
 }
 
 function WaypointInput(props) {
-  console.log(props)
-  var {route} = props;
-  var draft = props.draft;
+  var {route, waypoint, waypointEdited} = props;
   var addressInput = {};
-  const onChange = (event) => props.onUpdateWaypointDraft(addressInput.value);
-  const onAddWaypoint = () => props.onAddWaypoint(route.id, addressInput.value);
-  const onCloseWaypointDraft = () => props.onCloseWaypointDraft();
 
+  const onSaveWaypoint = () => props.onSaveWaypoint(waypoint.id)
+  const onChange = (event) => props.onEditWaypoint(waypoint.id, addressInput.value);
+  const onStartEditWaypoint = () => props.onStartEditWaypoint(waypoint.id);
+  const onDeleteWaypoint = () => props.onDeleteWaypoint(waypoint.id);
+
+  const isEdited = (waypoint.id === waypointEdited.id);
+  var validationError = null
+  if (isEdited && waypointEdited) validationError = waypointEdited.validationError
   return (
     <div>
       <Col md={12}>
@@ -49,16 +51,27 @@ function WaypointInput(props) {
       </Col>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
-          <FormGroup controlId="waypointInput">
-            <ControlLabel>Waypoint address</ControlLabel>
-            <FormControl  inputRef={(ref) => {addressInput = ref}} onChange={onChange}  value={draft.address} type='text'></FormControl>
+          <FormGroup controlId="waypointInput"
+            validationState={validationError}>
+            {(props.waypointIndex === 1) &&
+              <ControlLabel>Waypoint address</ControlLabel>
+            }
+            <FormControl
+              inputRef={(ref) => {addressInput = ref}}
+              readOnly={!isEdited}
+              onChange={onChange}
+              value={waypoint.address}
+              type='text'
+              onDoubleClick={onStartEditWaypoint}
+              ></FormControl>
           </FormGroup>
         </Col>
+          { (isEdited) &&
+            <Col md={2}>
+              <Button onClick={onSaveWaypoint}>Save</Button>
+            </Col>}
         <Col md={2}>
-          <Button onClick={onAddWaypoint}>Save</Button>
-        </Col>
-        <Col md={2}>
-          <Button onClick={onCloseWaypointDraft}>Cancel</Button>
+          <Button onClick={onDeleteWaypoint}>Delete</Button>
         </Col>
       </Col>
     </div>
@@ -91,17 +104,8 @@ function WaypointInputs(props) {
             <WaypointInput
             key={waypoint.id}
             waypointIndex={_local_counter++}
-            route={route}
             waypoint={waypoint}
-            draft={props.waypointDraft}
-            onAddWaypoint={props.onAddWaypoint}
-            onCloseWaypointDraft={props.onCloseWaypointDraft}
-            onUpdateWaypointDraft={props.onUpdateWaypointDraft}
-            waypointEdited={props.waypointEdited}
-            onStartEditWaypoint={props.onStartEditWaypoint}
-            onEditWaypoint={props.onEditWaypoint}
-            onDeleteWaypoint={props.onDeleteWaypoint}
-            onSaveWaypoint={props.onSaveWaypoint}
+            {...props}
           />
         ))}
 

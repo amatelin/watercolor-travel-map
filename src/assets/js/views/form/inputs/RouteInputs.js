@@ -46,18 +46,20 @@ function RouteInput(props) {
   const {route, routeEdited} = props;
   var inputs = {"departureAddress": null,
                 "arrivalAddress": null};
-  const onDeleteRoute = () => props.onDeleteRoute(route.id);
+
   const onSaveRoute = () => props.onSaveRoute(route.id);
-  const onStartEditRoute = () => props.onStartEditRoute(route.id);
   const onChange = (event) => props.onEditRoute(route.id, {departureAddress: inputs.departureAddress.value,
-                                                            arrivalAddress: inputs.arrivalAddress.value});
+    arrivalAddress: inputs.arrivalAddress.value});
+  const onStartEditRoute = () => props.onStartEditRoute(route.id);
+  const onDeleteRoute = () => props.onDeleteRoute(route.id);
   const onOpenWaypointDraft = () => props.onOpenWaypointDraft(route.id);
+
   const isEdited = (route.id === routeEdited.id);
   var validationErrors = [null,null];
   if (isEdited && routeEdited.validationErrors) validationErrors = routeEdited.validationErrors;
 
   return (
-    <div onDoubleClick={onStartEditRoute}>
+    <div>
       <Col md={12}>
         <p>Route nbr. {props.routeIndex}</p>
       </Col>
@@ -65,9 +67,12 @@ function RouteInput(props) {
         <Col md={4}>
           <FormGroup controlId="departureAddressInput"
           validationState={validationErrors[0]}>
+            {(props.routeIndex === 1) &&
             <ControlLabel>Departure address</ControlLabel>
+            }
             <FormControl
-              disabled={!isEdited}
+              onDoubleClick={onStartEditRoute}
+              readOnly={!isEdited}
               inputRef={(ref) => {inputs.departureAddress = ref}}
               onChange={onChange} value={props.route.departureAddress}
               type='text'></FormControl>
@@ -76,17 +81,22 @@ function RouteInput(props) {
         <Col md={4}>
           <FormGroup controlId="departureAddressInput"
           validationState={validationErrors[1]}>
-            <ControlLabel>Arrival address</ControlLabel>
+            {(props.routeIndex === 1)  &&
+              <ControlLabel>Arrival address</ControlLabel>
+            }
             <FormControl
-              disabled={!isEdited}
+              onDoubleClick={onStartEditRoute}
+              readOnly={!isEdited}
               inputRef={(ref) => {inputs.arrivalAddress = ref}}
               onChange={onChange} value={props.route.arrivalAddress}
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={2}>
-          <Button disabled={!isEdited} onClick={onSaveRoute}>Save</Button>
-        </Col>
+        {(isEdited &&
+          <Col md={2}>
+            <Button onClick={onSaveRoute}>Save</Button>
+          </Col>
+        )}
         <Col md={2}>
           <Button onClick={onDeleteRoute}>Delete</Button>
         </Col>
@@ -129,18 +139,8 @@ var input = <NewRouteInput
               key={route.id}
               routeIndex={_local_counter++}
               route={route}
-              waypoints={props.waypoints}
-              waypointDraft={props.waypointDraft}
-              waypointEdited={props.waypointEdited}
-              routeEdited={props.routeEdited}
-              onStartEditRoute={props.onStartEditRoute}
-              onEditRoute={props.onEditRoute}
-              onDeleteRoute={props.onDeleteRoute}
-              onSaveRoute={props.onSaveRoute}
-              onOpenWaypointDraft={props.onOpenWaypointDraft}
-              onUpdateWaypointDraft={props.onUpdateWaypointDraft}
-              onCloseWaypointDraft={props.onCloseWaypointDraft}
-              onAddWaypoint={props.onAddWaypoint}
+              {...props}
+
             />
           ))}
 

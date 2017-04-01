@@ -21,8 +21,12 @@ class WaypointEditStore extends ReduceStore {
           id: action.id
         };
       case ActionTypes.SAVE_WAYPOINT:
-        // Dispatcher.waitFor([RouteStore.getDispatchToken()]); // enable if validation used
-        return false;
+        Dispatcher.waitFor([WaypointStore.getDispatchToken()]); // enable if validation used
+        if (!action.validationError) return false;
+        else return {
+          id: state.id,
+          validationError: action.validationError
+        }
       default:
         return state;
     }

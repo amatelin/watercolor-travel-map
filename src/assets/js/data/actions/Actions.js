@@ -83,7 +83,7 @@ const Actions = {
     Dispatcher.dispatch({
       type: ActionTypes.EDIT_WAYPOINT,
       id: id,
-      data: address,
+      address: address,
     });
   },
   saveWaypoint(id) {
