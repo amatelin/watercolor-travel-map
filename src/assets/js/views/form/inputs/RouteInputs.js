@@ -3,6 +3,7 @@
 import React from 'react'
 import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib'
 import Counter from '../../../utils/Counter'
+import WaypointInputs from './WaypointInputs'
 
 function NewRouteInput(props) {
   var inputs = {"departureAddress": null,
@@ -50,6 +51,7 @@ function RouteInput(props) {
   const onStartEditRoute = () => props.onStartEditRoute(route.id);
   const onChange = (event) => props.onEditRoute(route.id, {departureAddress: inputs.departureAddress.value,
                                                             arrivalAddress: inputs.arrivalAddress.value});
+  const onOpenWaypointDraft = () => props.onOpenWaypointDraft(route.id);
   const isEdited = (route.id === routeEdited.id);
   var validationErrors = [null,null];
   if (isEdited && routeEdited.validationErrors) validationErrors = routeEdited.validationErrors;
@@ -88,6 +90,12 @@ function RouteInput(props) {
         <Col md={2}>
           <Button onClick={onDeleteRoute}>Delete</Button>
         </Col>
+        <Col md={4}>
+          <Button onClick={onOpenWaypointDraft}>Add waypoint</Button>
+        </Col>
+      </Col>
+      <Col md={12}>
+        <WaypointInputs {...props}/>
       </Col>
     </div>
 
@@ -121,11 +129,18 @@ var input = <NewRouteInput
               key={route.id}
               routeIndex={_local_counter++}
               route={route}
+              waypoints={props.waypoints}
+              waypointDraft={props.waypointDraft}
+              waypointEdited={props.waypointEdited}
               routeEdited={props.routeEdited}
               onStartEditRoute={props.onStartEditRoute}
               onEditRoute={props.onEditRoute}
               onDeleteRoute={props.onDeleteRoute}
               onSaveRoute={props.onSaveRoute}
+              onOpenWaypointDraft={props.onOpenWaypointDraft}
+              onUpdateWaypointDraft={props.onUpdateWaypointDraft}
+              onCloseWaypointDraft={props.onCloseWaypointDraft}
+              onAddWaypoint={props.onAddWaypoint}
             />
           ))}
 

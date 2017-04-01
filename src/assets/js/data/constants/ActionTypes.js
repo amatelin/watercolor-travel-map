@@ -16,14 +16,16 @@ export default keyMirror({
   CLOSE_ROUTE_DRAFT: null,
   UPDATE_ROUTE_DRAFT: null,
 
-  IS_ROUTE_EDIT_VALID: null,
-  SAVE_ROUTE_EDIT_CHANGES: null,
-
   ADD_WAYPOINT: null,
   SAVE_WAYPOINT: null,
+  START_EDIT_WAYPOINT: null,
   EDIT_WAYPOINT: null,
   DELETE_WAYPOINT: null,
   REORDER_WAYPOINT: null,
+
+  OPEN_WAYPOINT_DRAFT: null,
+  CLOSE_WAYPOINT_DRAFT: null,
+  UPDATE_WAYPOINT_DRAFT: null,
 
   ADD_POINT: null,
   SAVE_POINT: null,

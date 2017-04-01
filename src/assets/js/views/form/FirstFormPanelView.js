@@ -5,6 +5,7 @@ import {Row, Col, Button} from 'react-bootstrap/lib'
 import RouteInputs from './inputs/RouteInputs'
 
 function FirstStepView(props) {
+  console.log("RELOAD")
   return (
     <div>
       <Col md={4}>I am the first view</Col>
