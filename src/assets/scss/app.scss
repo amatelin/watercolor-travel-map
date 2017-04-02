@@ -4,6 +4,17 @@
 
 @import "bootstrap/assets/stylesheets/_bootstrap.scss";
 
+//@import 'react-select/dist/react-select.css';
+@import 'react-select/scss/default.scss';
+@import 'react-select/scss/components.scss';
+@import 'react-select/scss/control.scss';
+@import 'react-select/scss/menu.scss';
+@import 'react-select/scss/mixins.scss';
+@import 'react-select/scss/multi.scss';
+@import 'react-select/scss/select.scss';
+@import 'react-select/scss/spinner.scss';
+@import 'rc-color-picker/assets/index.css';
+
 @import "bourbon/bourbon";
 
 html {
@@ -79,4 +90,10 @@ html {
 .vertical-align-middle {
     display: flex;
     align-items: center;
+}
+
+// color picker css override
+.rc-color-picker-trigger {
+  width:80px;
+  height: 30px;
 }

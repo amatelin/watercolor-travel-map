@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
-import Counter from '../../../utils/Counter';
 const ENTER_KEY_CODE = 13;
 
 function PointDraftInput(props) {
@@ -96,9 +95,6 @@ function PointInput(props) {
   if (isEdited && pointEdited.validationErrors) validationErrors = pointEdited.validationErrors;
   return (
     <div>
-      <Col md={12}>
-        <p>Point nbr. {props.pointIndex}</p>
-      </Col>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
           <FormGroup controlId="latitudeInput"
@@ -196,7 +192,7 @@ function PointInputsComponent(props) {
 function PointInputs(props) {
   return (
     <div>
-      <Col md={12}>Points</Col>
+      <Col md={12}><h3>Points</h3></Col>
         <PointInputsComponent type='starting point' {...props}/>
         <PointInputsComponent type='end point' {...props}/>
         <PointInputsComponent type='waymark' {...props}/>

@@ -2,10 +2,10 @@
 
 import Dispatcher from '../dispatcher/Dispatcher';
 import ActionTypes from '../constants/ActionTypes';
-import WaypointStore from '../stores/WaypointStore'
+import TitleStore from '../stores/TitleStore'
 import {ReduceStore} from 'flux/utils'
 
-class WaypointEditStore extends ReduceStore {
+class TitleEditStore extends ReduceStore {
   constructor() {
     super(Dispatcher);
   }
@@ -16,15 +16,12 @@ class WaypointEditStore extends ReduceStore {
 
   reduce(state, action) {
     switch(action.type) {
-      case ActionTypes.START_EDIT_WAYPOINT:
-        return {
-          id: action.id
-        };
-      case ActionTypes.SAVE_WAYPOINT:
-        Dispatcher.waitFor([WaypointStore.getDispatchToken()]); // enable if validation used
+      case ActionTypes.START_EDIT_TITLE:
+        return true
+      case ActionTypes.SAVE_TITLE:
+        Dispatcher.waitFor([TitleStore.getDispatchToken()]); // enable if validation used
         if (!action.validationError) return false;
         else return {
-          id: state.id,
           validationError: action.validationError
         }
       default:
@@ -33,4 +30,4 @@ class WaypointEditStore extends ReduceStore {
   }
 }
 
-export default new WaypointEditStore();
+export default new TitleEditStore();

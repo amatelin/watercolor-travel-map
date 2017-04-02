@@ -2,7 +2,6 @@
 
 import React from 'react'
 import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib'
-import Counter from '../../../utils/Counter'
 import WaypointInputs from './WaypointInputs'
 const ENTER_KEY_CODE = 13;
 
@@ -78,9 +77,6 @@ function RouteInput(props) {
   if (isEdited && routeEdited.validationErrors) validationErrors = routeEdited.validationErrors;
   return (
     <div>
-      <Col md={12}>
-        <p>Route nbr. {props.routeIndex}</p>
-      </Col>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
           <FormGroup controlId="departureAddressInput"
@@ -170,7 +166,7 @@ function RouteInputsComponent(props) {
 function RouteInputs(props) {
   return (
     <div>
-      <Col md={12}>Routes</Col>
+      <Col md={12}><h3>Routes</h3></Col>
         <RouteInputsComponent type='cycling' {...props}/>
         <RouteInputsComponent type='bus' {...props}/>
         <RouteInputsComponent type='train' {...props}/>

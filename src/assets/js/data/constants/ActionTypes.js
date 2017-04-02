@@ -46,4 +46,14 @@ export default keyMirror({
   OPEN_POINT_DRAFT: null,
   CLOSE_POINT_DRAFT: null,
   UPDATE_POINT_DRAFT: null,
+
+  ADD_TITLE: null,
+  SAVE_TITLE: null,
+  START_EDIT_TITLE: null,
+  EDIT_TITLE: null,
+  DELETE_TITLE: null,
+
+  OPEN_TITLE_DRAFT: null,
+  CLOSE_TITLE_DRAFT: null,
+  UPDATE_TITLE_DRAFT: null,
 });

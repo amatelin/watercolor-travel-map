@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
-import Counter from '../../../utils/Counter';
 const ENTER_KEY_CODE = 13;
 
 function WaypointDraftInput(props) {
@@ -100,7 +99,6 @@ function WaypointInputs(props) {
   console.log(props)
   var {waypoints, waypointDraft, route} = props;
   var routeWaypoints = waypoints.filter(waypoint => waypoint.routeId == route.id);
-  // const onAddCyclingRoute = () => props.onAddRoute('cycling');
   const draftOn = (waypointDraft ? true : false);
   if (!routeWaypoints.size && waypointDraft.routeId !== route.id) return (<div></div>);
 
@@ -115,7 +113,7 @@ function WaypointInputs(props) {
 
   return (
     <div>
-      <Col md={12}>Waypoints</Col>
+      <Col md={12}><h3>Waypoints</h3></Col>
       <Col md={12}>
       {input}
       {routeWaypoints.map(waypoint => (

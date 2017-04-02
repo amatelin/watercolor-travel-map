@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
-import Counter from '../../../utils/Counter';
 const ENTER_KEY_CODE = 13;
 
 function GeodesicDraftInput(props) {
@@ -79,9 +78,6 @@ function GeodesicInput(props) {
   if (isEdited && geodesicEdited.validationErrors) validationErrors = geodesicEdited.validationErrors;
   return (
     <div>
-      <Col md={12}>
-        <p>Geodesic nbr. {props.geodesicIndex}</p>
-      </Col>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
           <FormGroup controlId="latitudeInput"
@@ -162,7 +158,7 @@ function GeodesicInputsComponent(props) {
 function GeodesicInputs(props) {
   return (
     <div>
-      <Col md={12}>Geodesics</Col>
+      <Col md={12}><h3>Geodesics</h3></Col>
         <GeodesicInputsComponent type='flight' {...props}/>
         <GeodesicInputsComponent type='ferry' {...props}/>
     </div>

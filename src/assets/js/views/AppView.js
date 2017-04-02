@@ -1,9 +1,7 @@
 'use strict'
 
 import React from 'react';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Button from 'react-bootstrap/lib/Button';
+import {Row, Col, Button, Glyphicon} from 'react-bootstrap/lib';
 import FirstFormPanelView from './form/FirstFormPanelView';
 import SecondFormPanelView from './form/SecondFormPanelView';
 import ThirdFormPanelView from './form/ThirdFormPanelView';
@@ -12,10 +10,8 @@ import ThirdFormPanelView from './form/ThirdFormPanelView';
 function AppView(props) {
   console.log("Load!")
   return (
-    // <div>Hello World</div>
     <Row>
-      <Col md={4}> Test1
-        <Col md={12}>Page number: {props.formIndex}</Col>
+      <Col md={4}>
         <FormPanel {...props} />
         <NavButtonBlock {...props} />
       </Col>
@@ -51,7 +47,7 @@ function NavButtonBlock(props) {
       {
         props.formIndex < 2 &&
           <Col md={6}>
-            <Button className='btn-block' onClick={props.onNextStep}>Next step</Button>
+            <Button className='btn-block' onClick={props.onNextStep}><Glyphicon glyph="star" />Next step</Button>
           </Col>
       }
     </Col>

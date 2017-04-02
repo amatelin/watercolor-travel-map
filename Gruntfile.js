@@ -124,7 +124,17 @@ module.exports = function(grunt) {
                    src: ['assets/fonts/**'],
                    dest: 'src/assets/fonts/bootstrap'
 
-                 }
+                 },
+                 {
+                    expand: true,
+                    filter: 'isFile',
+                    flatten: true,
+                    cwd: 'src/assets/',
+                    src: ['*/images'],
+                    dest: 'src/assets/images'
+
+                  }
+
               ]
             },
             dist: {
@@ -136,7 +146,8 @@ module.exports = function(grunt) {
                     '!assets/css/**',
                     '!assets/scss/**',
                     '!assets/js/**',
-                    '!assets/fonts/**'
+                    '!assets/fonts/**',
+                    '!assets/images/**'
                 ],
                 dest: 'dist/'
             }
