@@ -1,15 +1,21 @@
 'use strict'
 
-import React from 'react'
-import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib'
-import Counter from '../../../utils/Counter'
+import React from 'react';
+import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import Counter from '../../../utils/Counter';
+const ENTER_KEY_CODE = 13;
 
-function NewWaypointInput(props) {
+function WaypointDraftInput(props) {
   var {route, draft} = props;
   var addressInput = {};
   const onChange = (event) => props.onUpdateWaypointDraft(addressInput.value);
   const onAddWaypoint = () => props.onAddWaypoint(route.id, addressInput.value);
   const onCloseWaypointDraft = () => props.onCloseWaypointDraft();
+  const onKeyDown = (event) => {
+  if (event.keyCode === ENTER_KEY_CODE) {
+    onAddWaypoint();
+  }
+  };
 
   return (
     <div>
@@ -18,7 +24,12 @@ function NewWaypointInput(props) {
           <FormGroup controlId="waypointInput"
             validationState={props.draft.validationError}>
             <ControlLabel>Waypoint address</ControlLabel>
-            <FormControl  inputRef={(ref) => {addressInput = ref}} onChange={onChange}  value={draft.address} type='text'></FormControl>
+            <FormControl
+              inputRef={(ref) => {addressInput = ref}}
+              onKeyDown={onKeyDown}
+              onChange={onChange}
+              value={draft.address}
+              type='text'></FormControl>
           </FormGroup>
         </Col>
         <Col md={2}>
@@ -40,6 +51,11 @@ function WaypointInput(props) {
   const onChange = (event) => props.onEditWaypoint(waypoint.id, addressInput.value);
   const onStartEditWaypoint = () => props.onStartEditWaypoint(waypoint.id);
   const onDeleteWaypoint = () => props.onDeleteWaypoint(waypoint.id);
+  const onKeyDown = (event) => {
+  if (event.keyCode === ENTER_KEY_CODE) {
+    onSaveWaypoint();
+  }
+  };
 
   const isEdited = (waypoint.id === waypointEdited.id);
   var validationError = null
@@ -59,6 +75,7 @@ function WaypointInput(props) {
             <FormControl
               inputRef={(ref) => {addressInput = ref}}
               readOnly={!isEdited}
+              onKeyDown={onKeyDown}
               onChange={onChange}
               value={waypoint.address}
               type='text'
@@ -80,6 +97,7 @@ function WaypointInput(props) {
 
 function WaypointInputs(props) {
   var _local_counter = 1;
+  console.log(props)
   var {waypoints, waypointDraft, route} = props;
   var routeWaypoints = waypoints.filter(waypoint => waypoint.routeId == route.id);
   // const onAddCyclingRoute = () => props.onAddRoute('cycling');
@@ -87,7 +105,7 @@ function WaypointInputs(props) {
   if (!routeWaypoints.size && waypointDraft.routeId !== route.id) return (<div></div>);
 
   var input = '';
-  if (draftOn && waypointDraft.routeId == route.id) input = <NewWaypointInput
+  if (draftOn && waypointDraft.routeId == route.id) input = <WaypointDraftInput
                                                               route={route}
                                                               draft={props.waypointDraft}
                                                               onAddWaypoint={props.onAddWaypoint}

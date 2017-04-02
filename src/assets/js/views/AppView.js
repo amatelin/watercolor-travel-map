@@ -4,7 +4,7 @@ import React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Button from 'react-bootstrap/lib/Button';
-import FirstFormPanelContainer from '../containers/form/FirstFormPanelContainer';
+import FirstFormPanelView from './form/FirstFormPanelView';
 import SecondFormPanelView from './form/SecondFormPanelView';
 import ThirdFormPanelView from './form/ThirdFormPanelView';
 
@@ -30,7 +30,7 @@ function AppView(props) {
 function FormPanel(props) {
   switch(props.formIndex) {
     case 0:
-      return (<FirstFormPanelContainer />);
+      return (<FirstFormPanelView {...props} />);
     case 1:
       return (<SecondFormPanelView {...props} />);
     case 2:

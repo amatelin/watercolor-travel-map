@@ -18,6 +18,7 @@ class RouteDraftStore extends ReduceStore {
     switch(action.type) {
       case ActionTypes.OPEN_ROUTE_DRAFT:
         return {
+          routeType: action.routeType,
           arrivalAddress: '',
           departureAddress: '',
           validationErrors: [null, null]
@@ -26,6 +27,7 @@ class RouteDraftStore extends ReduceStore {
         return false;
       case ActionTypes.UPDATE_ROUTE_DRAFT:
         return {
+          routeType: state.routeType,
           departureAddress: action.data.departureAddress,
           arrivalAddress: action.data.arrivalAddress,
           validationErrors: [null, null]
@@ -34,6 +36,7 @@ class RouteDraftStore extends ReduceStore {
         Dispatcher.waitFor([RouteStore.getDispatchToken()]);
         if (!action.validationErrors) return false;
         else return {
+          routeType: state.routeType,
           departureAddress: state.departureAddress,
           arrivalAddress: state.arrivalAddress,
           validationErrors: action.validationErrors

@@ -42,7 +42,6 @@ class WaypointStore extends ReduceStore {
         var state = state.setIn([action.id, 'address'], action.address)
         return state;
       case ActionTypes.SAVE_WAYPOINT:
-        console.log(state)
         var validationError = this.validateData(state.get(action.id).address);
 
         if (!validationError) return state;

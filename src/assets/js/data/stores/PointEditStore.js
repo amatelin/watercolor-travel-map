@@ -2,10 +2,10 @@
 
 import Dispatcher from '../dispatcher/Dispatcher';
 import ActionTypes from '../constants/ActionTypes';
-import RouteStore from '../stores/RouteStore'
+import PointStore from '../stores/PointStore'
 import {ReduceStore} from 'flux/utils'
 
-class RouteEditStore extends ReduceStore {
+class PointEditStore extends ReduceStore {
   constructor() {
     super(Dispatcher);
   }
@@ -16,12 +16,12 @@ class RouteEditStore extends ReduceStore {
 
   reduce(state, action) {
     switch(action.type) {
-      case ActionTypes.START_EDIT_ROUTE:
+      case ActionTypes.START_EDIT_POINT:
         return {
           id: action.id
         };
-      case ActionTypes.SAVE_ROUTE:
-        Dispatcher.waitFor([RouteStore.getDispatchToken()]);
+      case ActionTypes.SAVE_POINT:
+        Dispatcher.waitFor([PointStore.getDispatchToken()]);
         if (!action.validationErrors) return false;
         else return {
           id: state.id,
@@ -33,4 +33,4 @@ class RouteEditStore extends ReduceStore {
   }
 }
 
-export default new RouteEditStore();
+export default new PointEditStore();

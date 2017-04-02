@@ -2,7 +2,7 @@
 
 import AppView from '../views/AppView';
 import {Container} from 'flux/utils';
-import Actions from '../data/actions/Actions';
+import AppStateActions from '../data/actions/AppStateActions';
 import AppStateStore from '../data/stores/AppStateStore';
 
 function getStores() {
@@ -15,8 +15,8 @@ function getState() {
   return {
     formIndex: AppStateStore.getState(),
 
-    onNextStep: Actions.toNextStep,
-    onPreviousStep: Actions.toPreviousStep,
+    onNextStep: AppStateActions.toNextStep,
+    onPreviousStep: AppStateActions.toPreviousStep,
   }
 }
 

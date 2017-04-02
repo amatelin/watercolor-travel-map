@@ -27,8 +27,23 @@ export default keyMirror({
   CLOSE_WAYPOINT_DRAFT: null,
   UPDATE_WAYPOINT_DRAFT: null,
 
+  ADD_GEODESIC: null,
+  SAVE_GEODESIC: null,
+  START_EDIT_GEODESIC: null,
+  EDIT_GEODESIC: null,
+  DELETE_GEODESIC: null,
+
+  OPEN_GEODESIC_DRAFT: null,
+  CLOSE_GEODESIC_DRAFT: null,
+  UPDATE_GEODESIC_DRAFT: null,
+
   ADD_POINT: null,
   SAVE_POINT: null,
+  START_EDIT_POINT: null,
   EDIT_POINT: null,
-  DELETE_POINT: null
+  DELETE_POINT: null,
+
+  OPEN_POINT_DRAFT: null,
+  CLOSE_POINT_DRAFT: null,
+  UPDATE_POINT_DRAFT: null,
 });
