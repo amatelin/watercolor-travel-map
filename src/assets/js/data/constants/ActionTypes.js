@@ -56,4 +56,7 @@ export default keyMirror({
   OPEN_TITLE_DRAFT: null,
   CLOSE_TITLE_DRAFT: null,
   UPDATE_TITLE_DRAFT: null,
+
+  EDIT_GRAPHIC: null,
+  RESET_GRAPHIC_OPTIONS: null,
 });

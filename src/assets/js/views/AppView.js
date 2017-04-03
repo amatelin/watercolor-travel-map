@@ -41,13 +41,13 @@ function NavButtonBlock(props) {
     <Col md={12} className='text-center'>
       {props.formIndex > 0 &&
         <Col md={6}>
-          <Button className='btn-block' onClick={props.onPreviousStep}>Previous step</Button>
+          <Button className='btn-block' onClick={props.onPreviousStep}><Glyphicon glyph="chevron-left" /> Previous step</Button>
         </Col>
       }
       {
         props.formIndex < 2 &&
           <Col md={6}>
-            <Button className='btn-block' onClick={props.onNextStep}><Glyphicon glyph="star" />Next step</Button>
+            <Button className='btn-block' onClick={props.onNextStep}>Next step <Glyphicon glyph="chevron-right" /></Button>
           </Col>
       }
     </Col>

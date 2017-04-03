@@ -1,13 +1,12 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, ControlLabel} from 'react-bootstrap/lib';
+import {Row, Col, ControlLabel, Button} from 'react-bootstrap/lib';
 import Select from 'react-select';
 import Utils from '../../../utils/Utils';
 import ColorPicker from 'rc-color-picker';
 
 function LineTypeInputImage(props) {
-  console.log(props)
   return (
     <div>
       <img width='60px' height='20px' src={'assets/images/' + props.value + '.png'}/>
@@ -17,21 +16,26 @@ function LineTypeInputImage(props) {
 }
 
 function LineTypeInput(props) {
-  var options = [
+  const options = [
   { value: 'dashline', label: 'Dash line' },
   { value: 'longdash', label: 'Long dash' },
   { value: 'mixeddash', label: 'Mixed dash'},
   { value: 'plainline', label: 'Plain line'},
   { value: 'dots', label: 'Dots'},
-  { value: 'cross', label: 'Crosses'}
+  { value: 'plusline', label: 'Plus signs'}
 ];
+
+  const onEditGraphicInput = (value) => props.onEditGraphicInput(props.optionsId, 'lineType', value);
 
   return (
     <div>
       <ControlLabel>Line type</ControlLabel>
       <Select
         name="form-field-name"
+        value={props.lineType}
+        onChange={onEditGraphicInput}
         optionRenderer={LineTypeInputImage}
+        valueRenderer={LineTypeInputImage}
         options={options}
         />
     </div>
@@ -39,13 +43,17 @@ function LineTypeInput(props) {
 }
 
 function LineColorInput(props) {
+  const onEditGraphicInput = (colors) => props.onEditGraphicInput(props.optionsId, 'color', {hex: colors.color, alpha:colors.alpha});
+  console.log(props.color)
   return (
     <div>
       <ControlLabel>Line color</ControlLabel>
       <div>
         <ColorPicker
         animation="slide-up"
-        color={'#36c'}
+        color={props.color}
+        alpha={props.alpha}
+        onChange = {onEditGraphicInput}
         />
       </div>
     </div>
@@ -53,37 +61,52 @@ function LineColorInput(props) {
 }
 
 function GraphicInput(props) {
-  const {inputType, inputFamily} = props;
+  const {inputType, inputFamily, options, id} = props;
   return (
     <div>
       <Col md={12}>
         <h3>{Utils.capitalizeFirstLetter(inputType)} {inputFamily}</h3>
       </Col>
       <Col md={6}>
-        <LineTypeInput />
+        <LineTypeInput optionsId={id}
+                        lineType={options.lineType}
+                        onEditGraphicInput={props.onEditGraphicInput}/>
       </Col>
       <Col md={6}>
-        <LineColorInput />
+        <LineColorInput optionsId={id}
+                        color={options.color.hex}
+                        alpha={options.color.alpha}
+                        onEditGraphicInput={props.onEditGraphicInput}/>
       </Col>
     </div>
   )
 };
 
-// function GraphicInputComponent()
 
 function GraphicInputs(props) {
+  const {graphicOptions} = props;
+  const onResetGraphicOptions = () => props.onResetGraphicOptions();
+  console.log('loaded')
+
   return (
     <div>
-      <Col md={12}>
-        <GraphicInput inputType='cycling' inputFamily='route'/>
-        <GraphicInput inputType='bus' inputFamily='route'/>
-        <GraphicInput inputType='train' inputFamily='route'/>
-        <GraphicInput inputType='other' inputFamily='route'/>
-        <GraphicInput inputType='flight' inputFamily='geodesic'/>
-        <GraphicInput inputType='ferry' inputFamily='geodesic'/>
+      <Col md={4}>
+        <Button onClick={onResetGraphicOptions}>Reset</Button>
       </Col>
+      {graphicOptions.map(options => (
+          <div>
+            <GraphicInput inputType={options.inputType}
+              inputFamily={options.inputFamily}
+              options={options.options}
+              id={options.id}
+              onEditGraphicInput={props.onEditGraphicInput}
+              />
+          </div>
+        ))
+      }
     </div>
   )
+
 };
 
 export default GraphicInputs;

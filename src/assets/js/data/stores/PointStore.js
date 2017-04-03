@@ -44,8 +44,7 @@ class PointStore extends ReduceStore {
       case ActionTypes.EDIT_POINT:
         return state
                 .setIn([action.id, 'coordinates'], {latitude: action.data.latitude,
-                                                    longitude: action.data.longitude,
-                                                    title: action.data.title})
+                                                    longitude: action.data.longitude})
                 .setIn([action.id, 'title'], action.data.title)
       case ActionTypes.SAVE_POINT:
         var validationErrors = this.validateData({latitude: state.get(action.id).coordinates.latitude,
