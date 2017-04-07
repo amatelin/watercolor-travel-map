@@ -15,11 +15,11 @@ function AppView(props) {
       <Header />
       <div id='wrap'>
         <Row id='main' className='row-eq-height'>
-          <Col md={4}>
+          <Col md={4} sm={12} className='form-panel-container'>
             <FormContainer {...props} />
           </Col>
 
-          <Col id='map-wrapper' md={8}>
+          <Col id='map-wrapper' md={8} sm={12}>
             <div id='map-container' className='iframe-container'></div>
           </Col>
         </Row>

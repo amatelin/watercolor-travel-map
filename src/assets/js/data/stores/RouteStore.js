@@ -21,6 +21,17 @@ class RouteStore extends ReduceStore {
     if (data.departureAddress && !data.arrivalAddress) return [null, 'error'];
     if (!data.departureAddress && data.arrivalAddress) return ['error', null];
     else return ['error', 'error'];
+  };
+
+  withWaypoints(routes, waypoints) {
+    return routes.map(route => {
+      var routeWaypoints = waypoints.filter(waypoint => {
+        if (waypoint.routeId === route.id) return waypoint;
+      });
+
+      route.waypoints = routeWaypoints;
+      return route;
+    });
   }
 
   reduce(state, action) {

@@ -80,10 +80,6 @@ html {
     width: 100%;
 }
 
-// Map
-#map-wrapper {
-}
-
 
 // Used to align cols vertically with the other children
 .vertical-align-end {
@@ -209,6 +205,48 @@ $width: 100px;
   }
 }
 
+#loader-container {
+    margin-top: 25px;
+    font-size: 21px;
+    text-align: center;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 // Footer
 #wrap {
   min-height: 100%;
@@ -236,18 +274,6 @@ $width: 100px;
   overflow-x: hidden;
 }
 
-.row-eq-height {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display:         flex;
-}
-
-.form-panel {
-  overflow: scroll;
-  height: 645px;
-}
-
 //Navbar
 .container {
   width: 100%;
@@ -260,4 +286,24 @@ $width: 100px;
 .navbar-brand {
   font-size: 35px;
   margin: 25px 0 25px 15px;
+}
+
+@media (min-width: 992px) {
+  .row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+  }
+
+  .form-panel {
+    overflow: scroll;
+    height: 645px;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-panel-container {
+    margin-bottom: 20px;
+  }
 }

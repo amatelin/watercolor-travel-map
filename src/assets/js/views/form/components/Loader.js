@@ -6,7 +6,7 @@ import {Col} from 'react-bootstrap/lib';
 function Loader(props) {
 
   return (
-    <div>
+    <div id='loader-container'>
       <Col md={12}>
         <h4 className='text-center'>Download will beggin shortly...</h4>
       </Col>

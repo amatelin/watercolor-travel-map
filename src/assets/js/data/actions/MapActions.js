@@ -8,6 +8,7 @@ const MapActions = {
     });
   },
   toggleMagicOption() {
+    console.log('dispatched')
     Dispatcher.dispatch({
       type: ActionTypes.TOGGLE_MAGIC_OPTION,
     });

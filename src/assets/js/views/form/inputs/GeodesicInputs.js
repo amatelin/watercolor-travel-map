@@ -5,13 +5,13 @@ import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-boot
 const ENTER_KEY_CODE = 13;
 
 function GeodesicDraftInput(props) {
-  var inputs = {"latitude": null,
-                "longitude": null};
+  var inputs = {"departureAddress": null,
+                "arrivalAddress": null};
 
-  const onChange = (event) => props.onUpdateGeodesicDraft({latitude: inputs.latitude.value,
-                                                            longitude: inputs.longitude.value});
-  const onAddGeodesic = () => props.onAddGeodesic(props.geodesicType, {latitude: inputs.latitude.value,
-                                                            longitude: inputs.longitude.value});
+  const onChange = (event) => props.onUpdateGeodesicDraft({departureAddress: inputs.departureAddress.value,
+                                                            arrivalAddress: inputs.arrivalAddress.value});
+  const onAddGeodesic = () => props.onAddGeodesic(props.geodesicType, {departureAddress: inputs.departureAddress.value,
+                                                            arrivalAddress: inputs.arrivalAddress.value});
   const onCloseGeodesicDraft = () => props.onCloseGeodesicDraft();
   const onKeyDown = (event) => {
   if (event.keyCode === ENTER_KEY_CODE) {
@@ -23,26 +23,26 @@ function GeodesicDraftInput(props) {
     <div>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
-          <FormGroup controlId="latitudeInput"
+          <FormGroup controlId="departureInput"
           validationState={props.draft.validationErrors[0]}>
-            <ControlLabel>Latitude</ControlLabel>
+            <ControlLabel>Departure</ControlLabel>
             <FormControl
-              inputRef={(ref) => {inputs.latitude = ref}}
+              inputRef={(ref) => {inputs.departureAddress = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
-              value={props.draft.latitude}
+              value={props.draft.departureAddress}
               type='text'></FormControl>
           </FormGroup>
         </Col>
         <Col md={4}>
-          <FormGroup controlId="longitudeInput"
+          <FormGroup controlId="arrivalInput"
           validationState={props.draft.validationErrors[1]}>
-            <ControlLabel>Longitude</ControlLabel>
+            <ControlLabel>Arrival</ControlLabel>
             <FormControl
-              inputRef={(ref) => {inputs.longitude = ref}}
+              inputRef={(ref) => {inputs.arrivalAddress = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
-              value={props.draft.longitude}
+              value={props.draft.arrivalAddress}
               type='text'></FormControl>
           </FormGroup>
         </Col>
@@ -59,12 +59,12 @@ function GeodesicDraftInput(props) {
 
 function GeodesicInput(props) {
   const {geodesic, geodesicEdited} = props;
-  var inputs = {"latitude": null,
-                "longitude": null};
+  var inputs = {"departureAddress": null,
+                "arrivalAddress": null};
 
   const onSaveGeodesic = () => props.onSaveGeodesic(geodesic.id);
-  const onChange = (event) => props.onEditGeodesic(geodesic.id, {latitude: inputs.latitude.value,
-    longitude: inputs.longitude.value});
+  const onChange = (event) => props.onEditGeodesic(geodesic.id, {departureAddress: inputs.departureAddress.value,
+    arrivalAddress: inputs.arrivalAddress.value});
   const onStartEditGeodesic = () => props.onStartEditGeodesic(geodesic.id);
   const onDeleteGeodesic = () => props.onDeleteGeodesic(geodesic.id);
   const onKeyDown = (event) => {
@@ -80,7 +80,7 @@ function GeodesicInput(props) {
     <div>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
-          <FormGroup controlId="latitudeInput"
+          <FormGroup controlId="departureAddressInput"
           validationState={validationErrors[0]}>
             {(props.geodesicIndex === 1) &&
             <ControlLabel>Latitude</ControlLabel>
@@ -89,13 +89,13 @@ function GeodesicInput(props) {
               onDoubleClick={onStartEditGeodesic}
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
-              inputRef={(ref) => {inputs.latitude = ref}}
-              onChange={onChange} value={props.geodesic.coordinates.latitude}
+              inputRef={(ref) => {inputs.departureAddress = ref}}
+              onChange={onChange} value={props.geodesic.departureAddress}
               type='text'></FormControl>
           </FormGroup>
         </Col>
         <Col md={4}>
-          <FormGroup controlId="longitudeInput"
+          <FormGroup controlId="arrivalAddressInput"
           validationState={validationErrors[1]}>
             {(props.geodesicIndex === 1)  &&
               <ControlLabel>Longitude</ControlLabel>
@@ -104,8 +104,8 @@ function GeodesicInput(props) {
               onDoubleClick={onStartEditGeodesic}
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
-              inputRef={(ref) => {inputs.longitude = ref}}
-              onChange={onChange} value={props.geodesic.coordinates.longitude}
+              inputRef={(ref) => {inputs.arrivalAddress = ref}}
+              onChange={onChange} value={props.geodesic.arrivalAddress}
               type='text'></FormControl>
           </FormGroup>
         </Col>

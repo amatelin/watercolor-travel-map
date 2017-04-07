@@ -17,9 +17,9 @@ class GeodesicStore extends ReduceStore {
   }
 
   validateData(data) {
-    if (data.latitude && data.longitude) return null;
-    if (data.latitude && !data.longitude) return [null, 'error'];
-    if (!data.latitude && data.longitude) return ['error', null];
+    if (data.departureAddress && data.arrivalAddress) return null;
+    if (data.departureAddress && !data.arrivalAddress) return [null, 'error'];
+    if (!data.departureAddress && data.arrivalAddress) return ['error', null];
     else return ['error', 'error'];
   }
 
@@ -31,21 +31,24 @@ class GeodesicStore extends ReduceStore {
         var validationErrors = this.validateData(action.data);
         if (!validationErrors) {
           return state.set(id, new Geodesic({
-          id,
-          type: action.geodesicType,
-          coordinates: {latitude: action.data.latitude,
-                        longitude: action.data.longitude}
-        })); }
+            id,
+            type: action.geodesicType,
+            departureAddress: action.data.departureAddress,
+            arrivalAddress: action.data.arrivalAddress
+            })
+          );
+        }
         else {
           action.validationErrors = validationErrors;
           return state;
         }
       case ActionTypes.EDIT_GEODESIC:
         return state
-                .setIn([action.id, 'coordinates'], action.data)
+                .setIn([action.id, departureAddress], action.data.departureAddress)
+                .setIn([action.id, arrivalAddress], action.data.arrivalAddress)
       case ActionTypes.SAVE_GEODESIC:
-        var validationErrors = this.validateData({latitude: state.get(action.id).coordinates.latitude,
-                                                  longitude: state.get(action.id).coordinates.longitude});
+        var validationErrors = this.validateData({departureAddress: state.get(action.id).departureAddress,
+                                                  arrivalAddress: state.get(action.id).arrivalAddress});
         if (!validationErrors) return state;
         else {
           action.validationErrors = validationErrors;

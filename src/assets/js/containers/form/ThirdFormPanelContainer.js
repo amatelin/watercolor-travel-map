@@ -7,8 +7,10 @@ import PointStore from '../../data/stores/PointStore';
 import RouteStore from '../../data/stores/RouteStore';
 import TitleStore from '../../data/stores/TitleStore';
 import WaypointStore from '../../data/stores/WaypointStore';
-import GraphicStore from '../../data/stores/GeodesicStore';
+import GraphicStore from '../../data/stores/GraphicStore';
+import MapStore from '../../data/stores/MapStore';
 
+import MapActions from '../../data/actions/MapActions';
 
 function getStores() {
   return [
@@ -17,7 +19,8 @@ function getStores() {
     RouteStore,
     TitleStore,
     WaypointStore,
-    GraphicStore
+    GraphicStore,
+    MapStore,
   ];
 }
 
@@ -29,6 +32,12 @@ function getState() {
     title: TitleStore.getState(),
     waypoints: WaypointStore.getState(),
     graphicOptions: GraphicStore.getState(),
+    mapOptions: MapStore.getState(),
+
+    routesWithWaypoints: RouteStore.withWaypoints,
+    onToggleMagicOption: MapActions.toggleMagicOption,
+    onToggleLoader: MapActions.toggleLoader,
+
   }
 }
 
