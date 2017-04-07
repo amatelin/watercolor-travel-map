@@ -6,7 +6,7 @@ import {ReduceStore} from 'flux/utils';
 
 const MAX_INDEX = 2;
 
-class AppStateStore extends ReduceStore {
+class FormStateStore extends ReduceStore {
   constructor() {
     super(Dispatcher);
   }
@@ -31,4 +31,4 @@ class AppStateStore extends ReduceStore {
   }
 }
 
-export default new AppStateStore();
+export default new FormStateStore();

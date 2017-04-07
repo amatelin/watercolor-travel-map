@@ -75,7 +75,6 @@ class GraphicStore extends ReduceStore {
     var dataCopy = JSON.parse(JSON.stringify(data))
 
     dataCopy.map(graphicOptions => {
-      console.log(graphicOptions.options)
       const id = Counter.increment();
       state = state.set(id, new Graphic({
         id,

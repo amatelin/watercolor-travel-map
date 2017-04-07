@@ -7,7 +7,7 @@ var DefaultRoute = Router.DefaultRoute;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 
-var AppView = require('./containers/AppContainer');
+var AppView = require('./views/AppView');
 
 var routes = (
     <Route path="/" component={AppView}>

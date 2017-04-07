@@ -1,11 +1,11 @@
 import keyMirror from 'keymirror';
 
 export default keyMirror({
+  // FormState
   TO_NEXT_STEP: null,
   TO_PREVIOUS_STEP: null,
 
-  SET_TITLE: null,
-
+  // Route
   ADD_ROUTE: null,
   SAVE_ROUTE: null,
   START_EDIT_ROUTE: null,
@@ -16,6 +16,7 @@ export default keyMirror({
   CLOSE_ROUTE_DRAFT: null,
   UPDATE_ROUTE_DRAFT: null,
 
+  // Waypoint
   ADD_WAYPOINT: null,
   SAVE_WAYPOINT: null,
   START_EDIT_WAYPOINT: null,
@@ -27,6 +28,7 @@ export default keyMirror({
   CLOSE_WAYPOINT_DRAFT: null,
   UPDATE_WAYPOINT_DRAFT: null,
 
+  // Geodesic
   ADD_GEODESIC: null,
   SAVE_GEODESIC: null,
   START_EDIT_GEODESIC: null,
@@ -37,6 +39,7 @@ export default keyMirror({
   CLOSE_GEODESIC_DRAFT: null,
   UPDATE_GEODESIC_DRAFT: null,
 
+  // Point
   ADD_POINT: null,
   SAVE_POINT: null,
   START_EDIT_POINT: null,
@@ -47,6 +50,7 @@ export default keyMirror({
   CLOSE_POINT_DRAFT: null,
   UPDATE_POINT_DRAFT: null,
 
+  // Title
   ADD_TITLE: null,
   SAVE_TITLE: null,
   START_EDIT_TITLE: null,
@@ -57,6 +61,11 @@ export default keyMirror({
   CLOSE_TITLE_DRAFT: null,
   UPDATE_TITLE_DRAFT: null,
 
+  // Graphic
   EDIT_GRAPHIC: null,
   RESET_GRAPHIC_OPTIONS: null,
+
+  // Map
+  TOGGLE_LOADER: null,
+  TOGGLE_MAGIC_OPTION: null,
 });

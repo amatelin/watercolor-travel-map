@@ -80,6 +80,10 @@ html {
     width: 100%;
 }
 
+// Map
+#map-wrapper {
+}
+
 
 // Used to align cols vertically with the other children
 .vertical-align-end {
@@ -96,4 +100,164 @@ html {
 .rc-color-picker-trigger {
   width:80px;
   height: 30px;
+}
+
+// magic related
+.magic-on {
+  .gmnoprint a, .gmnoprint span {
+    display:none;
+  }
+  .gmnoprint div {
+    background:none !important;
+  }
+
+  img[src="https://maps.gstatic.com/mapfiles/api-3/images/google4.png"], a[href^="http://maps.google.com/maps"]{
+    display:none !important;
+  }
+
+}
+
+// Loader
+
+$green: #008744;
+$blue: #0057e7;
+$red: #d62d20;
+$yellow: #ffa700;
+$white: #eee;
+
+// scaling... any units
+$width: 100px;
+
+
+// demo-specific
+.showbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5%;
+}
+// end demo-specific
+
+.loader {
+  position: relative;
+  margin: 0 auto;
+  width: $width;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes color {
+  100%,
+  0% {
+    stroke: $red;
+  }
+  40% {
+    stroke: $blue;
+  }
+  66% {
+    stroke: $green;
+  }
+  80%,
+  90% {
+    stroke: $yellow;
+  }
+}
+
+// Footer
+#wrap {
+  min-height: 100%;
+}
+
+#main {
+  overflow:auto;
+  padding-bottom: 125px; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+  position: relative;
+  margin-top: -125px; /* negative value of footer height */
+  height: 125px;
+  clear:both;
+  background-color: #f5f5f5;
+}
+
+.credit {
+  margin-top: 3%;
+}
+
+// App container
+#app {
+  overflow-x: hidden;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.form-panel {
+  overflow: scroll;
+  height: 645px;
+}
+
+//Navbar
+.container {
+  width: 100%;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-brand {
+  font-size: 35px;
+  margin: 25px 0 25px 15px;
 }

@@ -1,7 +1,7 @@
 import ActionTypes from '../constants/ActionTypes';
 import Dispatcher from '../dispatcher/Dispatcher';
 
-const AppStateActions = {
+const FormStateActions = {
   toNextStep() {
     Dispatcher.dispatch({
       type: ActionTypes.TO_NEXT_STEP
@@ -14,4 +14,4 @@ const AppStateActions = {
   }
 }
 
-export default AppStateActions;
+export default FormStateActions;

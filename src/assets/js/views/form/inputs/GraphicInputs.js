@@ -44,7 +44,6 @@ function LineTypeInput(props) {
 
 function LineColorInput(props) {
   const onEditGraphicInput = (colors) => props.onEditGraphicInput(props.optionsId, 'color', {hex: colors.color, alpha:colors.alpha});
-  console.log(props.color)
   return (
     <div>
       <ControlLabel>Line color</ControlLabel>
@@ -86,7 +85,6 @@ function GraphicInput(props) {
 function GraphicInputs(props) {
   const {graphicOptions} = props;
   const onResetGraphicOptions = () => props.onResetGraphicOptions();
-  console.log('loaded')
 
   return (
     <div>

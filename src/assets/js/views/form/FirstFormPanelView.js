@@ -1,26 +1,41 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, Button} from 'react-bootstrap/lib';
+import {Row, Col, Button, Panel} from 'react-bootstrap/lib';
 import RouteInputsContainer from '../../containers/form/inputs/RouteInputsContainer';
 import GeodesicInputsContainer from '../../containers/form/inputs/GeodesicInputsContainer';
 import PointInputsContainer from '../../containers/form/inputs/PointInputsContainer';
 import TitleInputContainer from '../../containers/form/inputs/TitleInputContainer';
 
-function FirstStepView(props) {
+function FirstFormPanelView(props) {
+  const title = (
+    <h3>First step: set up routes</h3>
+  );
+
   return (
     <div>
-      <Col md={12}>
+      <Panel className='form-panel'>
         <h2>First step: set up routes</h2>
-      </Col>
-      <Col md={12}>
         <RouteInputsContainer {...props} />
         <GeodesicInputsContainer {...props} />
         <PointInputsContainer {...props} />
         <TitleInputContainer {...props} />
-      </Col>
+      </Panel>
     </div>
   )
+  // return (
+  //   <div>
+  //     <Col md={12}>
+  //       <h2></h2>
+  //     </Col>
+  //     <Col md={12}>
+  //       <RouteInputsContainer {...props} />
+  //       <GeodesicInputsContainer {...props} />
+  //       <PointInputsContainer {...props} />
+  //       <TitleInputContainer {...props} />
+  //     </Col>
+  //   </div>
+  // )
 }
 
-export default FirstStepView;
+export default FirstFormPanelView;

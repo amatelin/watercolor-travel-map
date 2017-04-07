@@ -2,56 +2,34 @@
 
 import React from 'react';
 import {Row, Col, Button, Glyphicon} from 'react-bootstrap/lib';
-import FirstFormPanelView from './form/FirstFormPanelView';
-import SecondFormPanelView from './form/SecondFormPanelView';
-import ThirdFormPanelView from './form/ThirdFormPanelView';
+import FormContainer from '../containers/form/FormContainer';
+import Footer from './components/Footer';
+import Header from './components/Header'
+import Map from '../utils/Map';
 
 
 function AppView(props) {
-  console.log("Load!")
+  Map.addListener();
   return (
-    <Row>
-      <Col md={4}>
-        <FormPanel {...props} />
-        <NavButtonBlock {...props} />
-      </Col>
-
-      <Col md={8}>
-        <h1>I am a map</h1>
-      </Col>
-    </Row>
-  )
-}
-
-function FormPanel(props) {
-  switch(props.formIndex) {
-    case 0:
-      return (<FirstFormPanelView {...props} />);
-    case 1:
-      return (<SecondFormPanelView {...props} />);
-    case 2:
-      return (<ThirdFormPanelView {...props} />);
-    default:
-      return (<div></div>)
-  }
-}
-
-function NavButtonBlock(props) {
-  return(
-    <Col md={12} className='text-center'>
-      {props.formIndex > 0 &&
-        <Col md={6}>
-          <Button className='btn-block' onClick={props.onPreviousStep}><Glyphicon glyph="chevron-left" /> Previous step</Button>
-        </Col>
-      }
-      {
-        props.formIndex < 2 &&
-          <Col md={6}>
-            <Button className='btn-block' onClick={props.onNextStep}>Next step <Glyphicon glyph="chevron-right" /></Button>
+    <div>
+      <Header />
+      <div id='wrap'>
+        <Row id='main' className='row-eq-height'>
+          <Col md={4}>
+            <FormContainer {...props} />
           </Col>
-      }
-    </Col>
+
+          <Col id='map-wrapper' md={8}>
+            <div id='map-container' className='iframe-container'></div>
+          </Col>
+        </Row>
+      </div>
+      <Footer />
+    </div>
   )
 }
+
+
+
 
 export default AppView;
