@@ -42,7 +42,40 @@ import FileSaver from 'file-saver';
 //   }
 //   mapLocation();
 // }
-
+const lineSymbols = {
+      plainline: {
+        path: '',
+        scale: 0,
+        repeat: 0
+      },
+      dashline: {
+        path: 'M 0,-1 0,1',
+        scale: 4,
+        repeat: '20px'
+      },
+      dots: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 2,
+        repeat: '15px'
+      },
+      longdash: {
+        path: 'M 0, -2.5, 0, 1',
+        scale: 4,
+        repeat: '25px'
+      },
+      mixeddash: {
+        path: 'M 0, -2.5, 0, 1, M 0, 4, 0, 5',//'M 0, 4.5, 0, 2.5, M 0, 1, 0, 0',
+        scale: 4,
+        repeat: '40px'
+      },
+      plusline: {
+        path: 'M 1, 0, 1, 2, M 0, 1, 2, 1',
+        scale: 3,
+        repeat: '15px'
+      }
+  // dots: "M 1, 1 m -0.75, 0 a 0.75,0.75 0 1,0 1.5,0 a 0.75,0.75 0 1,0 -1.5,0"
+  // dots: 'M9.875,0.625C4.697,0.625,0.5,4.822,0.5,10s4.197,9.375,9.375,9.375S19.25,15.178,19.25,10S15.053,0.625,9.875,0.625'
+};
 var directionsDisplay = null;
 var directionsService = null;
 var map = null;
@@ -76,14 +109,11 @@ const Map = {
         mapTypeControlOptions: {
           mapTypeIds: []
         },
-        // navigationControl: false,
         disableDefaultUI:true
       };
       map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
       map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
       directionsDisplay.setMap(map);
-      // calcRoutes();
-      // flightPaths();
     },
 
   downloadImage(mapOptions, callback) {
@@ -108,22 +138,39 @@ const Map = {
       address: address
     })
     .asPromise()
-    // geocoder.geocode( { 'address': address}, function(results, status) {
-    //   if (status == 'OK') {
-    //         var temp = results[0].geometry.location;
-    //   } else {
-    //     alert('Geocode was not successful for the following reason: ' + status);
-    //   }
-    // });
   },
 
   drawRoute(options, response) {
+    var strokeColor;
+    var strokeOpacity;
+    if (options.lineType == 'plainline') {
+      strokeColor = options.color.hex;
+      strokeOpacity = options.color.alpha / 100;
+    } else {
+      strokeColor = '#FF0000';
+      strokeOpacity = 0;
+    }
+
+    var lineSymbol = {
+      path: lineSymbols[options.lineType].path,
+      strokeOpacity: options.color.alpha/100,
+      strokeColor: options.color.hex,
+      fillOpacity: options.color.alpha/100,
+      fillColor: options.color.hex,
+      scale: lineSymbols[options.lineType].scale
+    };
+
     var directionsRenderer = new google.maps.DirectionsRenderer({
       suppressMarkers: true,
       polylineOptions: {
-        strokeColor: options.color.hex, //'#437070',
+        strokeColor: strokeColor,
+        strokeOpacity: strokeOpacity,
         strokeWeight: 4,
-        strokeOpacity: options.color.alpha/100
+        icons: [{
+          icon: lineSymbol,
+          offset: '0',
+          repeat: lineSymbols[options.lineType].repeat
+        }]
       }
     });
     directionsRenderer.setMap(map);
@@ -131,23 +178,34 @@ const Map = {
   },
 
   drawGeodesic(options, coordinates) {
-    console.log(options)
+    var strokeColor;
+    var strokeOpacity;
+    if (options.lineType == 'plainline') {
+      strokeColor = options.color.hex;
+      strokeOpacity = options.color.alpha / 100;
+    } else {
+      strokeColor = '#FF0000';
+      strokeOpacity = 0;
+    }
+
     var lineSymbol = {
-      path: 'M 0,-1 0,1',
+      path: lineSymbols[options.lineType].path,
       strokeOpacity: options.color.alpha/100,
       strokeColor: options.color.hex,
-      scale: 4
+      fillOpacity: options.color.alpha/100,
+      fillColor: options.color.hex,
+      scale: lineSymbols[options.lineType].scale
     };
 
     var geodesic = new google.maps.Polyline({
       path: coordinates,
       geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 0,
+      strokeColor: strokeColor,
+      strokeOpacity: strokeOpacity,
       icons: [{
         icon: lineSymbol,
         offset: '0',
-        repeat: '20px'
+        repeat: lineSymbols[options.lineType].repeat
       }]
     });
     geodesic.setMap(map);
@@ -195,7 +253,6 @@ const Map = {
       this.geoCodeAddress(geodesic.arrivalAddress)
     .then(secondResponse => {
       coordinates.push(secondResponse.json.results[0].geometry.location)
-      console.log(coordinates)
       this.drawGeodesic(options.options, coordinates)
     });
     })
