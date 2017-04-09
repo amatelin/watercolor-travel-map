@@ -3,45 +3,6 @@
 import html2canvas from 'html2canvas';
 import FileSaver from 'file-saver';
 
-// function run() {
-//   console.log('run')
-//   function mapLocation() {
-//     console.log("map loc")
-//
-//
-//
-//
-//     function calcRoutes() {
-//       calcRoute("Montreal", "Vancouver", ["North Bay Canada", "Sault St Marie", "Thunder bay Canada", "Winnipeg", "Saskatoon", "Calgary", "Kelowna", "Toffino"]);
-//       calcRoute("Denpasar", "Jakarta", ["Jember", "Lumajang", "Dampit", "Malang", "Yogjakarta", "Cirebon"]);
-//       calcRoute("Singapore", "Penang", ["Mersing", "Pahang", "Temerloh", "Cameron Highlands"]);
-//       calcRoute("Kuah Langkawi", "Kuah Langkawi", ["Shaka Langkawi", "Panorama Langkawi", "Tanjung Rhu Beach", "Kisap Langkawi"])
-//       calcRoute("Satun", "Bangkok", ["Krabi", "Ranong", "Chumpon"]);
-//       directionsDisplay.setMap(map);
-//     }
-//
-//     function flightPaths() {
-//       flightPath([{
-//         lat: 49.246292,
-//         lng: -123.116226
-//       }, {
-//         lat: -8.650000,
-//         lng: 115.216667
-//       }, ]);
-//       flightPath([{
-//         lat: -6.318540,
-//         lng: 106.899117
-//       }, {
-//         lat: 1.290270,
-//         lng: 103.851959
-//       }])
-//     }
-//
-//
-//     initialize();
-//   }
-//   mapLocation();
-// }
 const lineSymbols = {
       plainline: {
         path: '',
@@ -64,7 +25,7 @@ const lineSymbols = {
         repeat: '25px'
       },
       mixeddash: {
-        path: 'M 0, -2.5, 0, 1, M 0, 4, 0, 5',//'M 0, 4.5, 0, 2.5, M 0, 1, 0, 0',
+        path: 'M 0, -2.5, 0, 1, M 0, 4, 0, 5',
         scale: 4,
         repeat: '40px'
       },
@@ -73,9 +34,8 @@ const lineSymbols = {
         scale: 3,
         repeat: '15px'
       }
-  // dots: "M 1, 1 m -0.75, 0 a 0.75,0.75 0 1,0 1.5,0 a 0.75,0.75 0 1,0 -1.5,0"
-  // dots: 'M9.875,0.625C4.697,0.625,0.5,4.822,0.5,10s4.197,9.375,9.375,9.375S19.25,15.178,19.25,10S15.053,0.625,9.875,0.625'
 };
+
 var directionsDisplay = null;
 var directionsService = null;
 var map = null;
