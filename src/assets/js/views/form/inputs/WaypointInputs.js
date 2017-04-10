@@ -28,6 +28,7 @@ function WaypointDraftInput(props) {
               inputRef={(ref) => {addressInput = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
+              placeholder='required'
               value={draft.address}
               type='text'></FormControl>
           </FormGroup>
@@ -79,6 +80,7 @@ function WaypointInput(props) {
               readOnly={!isEdited}
               onKeyDown={onKeyDown}
               onChange={onChange}
+              placeholder='required'
               value={waypoint.address}
               type='text'
               onDoubleClick={onStartEditWaypoint}

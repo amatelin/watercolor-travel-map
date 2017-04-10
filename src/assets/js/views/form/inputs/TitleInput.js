@@ -28,6 +28,7 @@ function TitleDraftInputComponent(props) {
               inputRef={(ref) => {input = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
+              placeholder='required'
               value={props.draft.text}
               type='text'></FormControl>
           </FormGroup>
@@ -70,6 +71,7 @@ function TitleInputComponent(props) {
               onDoubleClick={onStartEditTitle}
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
+              placeholder='required'
               inputRef={(ref) => {input = ref}}
               onChange={onChange} value={title}
               type='text'></FormControl>

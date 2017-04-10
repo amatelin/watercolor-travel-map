@@ -31,6 +31,7 @@ function GeodesicDraftInput(props) {
               inputRef={(ref) => {inputs.departureAddress = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
+              placeholder='required'
               value={props.draft.departureAddress}
               type='text'></FormControl>
           </FormGroup>
@@ -44,6 +45,7 @@ function GeodesicDraftInput(props) {
               onKeyDown={onKeyDown}
               onChange={onChange}
               value={props.draft.arrivalAddress}
+              placeholder='required'
               type='text'></FormControl>
           </FormGroup>
         </Col>
@@ -86,12 +88,13 @@ function GeodesicInput(props) {
           <FormGroup controlId="departureAddressInput"
           validationState={validationErrors[0]}>
             {(props.geodesicIndex === 1) &&
-            <ControlLabel>Latitude</ControlLabel>
+            <ControlLabel>Departure location</ControlLabel>
             }
             <FormControl
               onDoubleClick={onStartEditGeodesic}
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
+              placeholder='required'
               inputRef={(ref) => {inputs.departureAddress = ref}}
               onChange={onChange} value={props.geodesic.departureAddress}
               type='text'></FormControl>
@@ -101,12 +104,13 @@ function GeodesicInput(props) {
           <FormGroup controlId="arrivalAddressInput"
           validationState={validationErrors[1]}>
             {(props.geodesicIndex === 1)  &&
-              <ControlLabel>Longitude</ControlLabel>
+              <ControlLabel>Arrival location</ControlLabel>
             }
             <FormControl
               onDoubleClick={onStartEditGeodesic}
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
+              placeholder='required'
               inputRef={(ref) => {inputs.arrivalAddress = ref}}
               onChange={onChange} value={props.geodesic.arrivalAddress}
               type='text'></FormControl>

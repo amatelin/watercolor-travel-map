@@ -35,7 +35,8 @@ function PointDraftInput(props) {
               inputRef={(ref) => {inputs.address = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
-              value={props.draft.longitude}
+              placeholder='required'
+              value={props.draft.address}
               type='text'></FormControl>
           </FormGroup>
         </Col>
@@ -97,6 +98,7 @@ function PointInput(props) {
               onDoubleClick={onStartEditPoint}
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
+              placeholder='required'
               inputRef={(ref) => {inputs.address = ref}}
               onChange={onChange} value={props.point.address}
               type='text'></FormControl>

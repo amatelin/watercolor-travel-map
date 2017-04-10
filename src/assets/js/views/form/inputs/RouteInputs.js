@@ -30,6 +30,7 @@ function RouteDraftInput(props) {
             <FormControl inputRef={(ref) => {inputs.departureAddress = ref}}
               onChange={onChange}
               onKeyDown={onKeyDown}
+              placeholder='required'
               value={props.draft.departureAddress}
               type='text'></FormControl>
           </FormGroup>
@@ -41,6 +42,7 @@ function RouteDraftInput(props) {
             <FormControl inputRef={(ref) => {inputs.arrivalAddress = ref}}
               onChange={onChange}
               onKeyDown={onKeyDown}
+              placeholder='required'
               value={props.draft.arrivalAddress}
               type='text'></FormControl>
           </FormGroup>
@@ -90,6 +92,7 @@ function RouteInput(props) {
             <FormControl
               onDoubleClick={onStartEditRoute}
               readOnly={!isEdited}
+              placeholder='required'
               inputRef={(ref) => {inputs.departureAddress = ref}}
               onChange={onChange} value={props.route.departureAddress}
               onKeyDown={onKeyDown}
@@ -105,6 +108,7 @@ function RouteInput(props) {
             <FormControl
               onDoubleClick={onStartEditRoute}
               readOnly={!isEdited}
+              placeholder='required'
               inputRef={(ref) => {inputs.arrivalAddress = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange} value={props.route.arrivalAddress}
