@@ -19,30 +19,27 @@ class PointStoreDraftStore extends ReduceStore {
       case ActionTypes.OPEN_POINT_DRAFT:
         return {
           pointType: action.pointType,
-          latitude: '',
-          longitude: '',
+          address: '',
           title: '',
-          validationErrors: [null, null]
+          validationError: null
         };
       case ActionTypes.CLOSE_POINT_DRAFT:
         return false;
       case ActionTypes.UPDATE_POINT_DRAFT:
         return {
           pointType: state.pointType,
-          latitude: action.data.latitude,
-          longitude: action.data.longitude,
+          address: action.data.address,
           title: action.data.title,
-          validationErrors: [null, null]
+          validationError: null
         }
       case ActionTypes.ADD_POINT:
         Dispatcher.waitFor([PointStore.getDispatchToken()]);
-        if (!action.validationErrors) return false;
+        if (!action.validationError) return false;
         else return {
           pointType: state.pointType,
-          latitude: state.latitude,
-          longitude: state.longitude,
+          address: state.address,
           title: state.title,
-          validationErrors: action.validationErrors
+          validationError: action.validationError
         };
       default:
         return state;

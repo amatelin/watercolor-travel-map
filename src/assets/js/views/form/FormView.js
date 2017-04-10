@@ -5,7 +5,7 @@ import {Row, Col, Button, Glyphicon} from 'react-bootstrap/lib';
 import FirstFormPanelView from './FirstFormPanelView';
 import SecondFormPanelView from './SecondFormPanelView';
 import ThirdFormPanelContainer from '../../containers/form/ThirdFormPanelContainer';
-
+import GenerateMapButtonContainer from '../../containers/form/GenerateMapButtonContainer';
 function FormView(props) {
   var panel;
   switch(props.formIndex) {
@@ -44,7 +44,7 @@ function NavButtonBlock(props) {
     case 1:
       buttons = [
         <PreviousStepButton {...props}/>,
-        <GenerateMapButton {...props}/>
+        <GenerateMapButtonContainer {...props}/>
       ]
 
       break;
@@ -82,12 +82,12 @@ function PreviousStepButton(props) {
   )
 }
 
-function GenerateMapButton(props) {
-  return (
-    <Col md={6} sm={6}>
-      <Button className='btn-block' onClick={props.onNextStep}>Generate Map <Glyphicon glyph="cog" /></Button>
-    </Col>
-  )
-}
+// function GenerateMapButton(props) {
+//   return (
+//     <Col md={6} sm={6}>
+//       <Button className='btn-block' onClick={props.onNextStep}>Generate Map <Glyphicon glyph="cog" /></Button>
+//     </Col>
+//   )
+// }
 
 export default FormView;

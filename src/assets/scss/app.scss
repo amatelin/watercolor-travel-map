@@ -288,6 +288,14 @@ $width: 100px;
   margin: 25px 0 25px 15px;
 }
 
+// legend
+#map-legend h4 {
+  font-family: 'Homemade apple';
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0.75
+}
+
 @media (min-width: 992px) {
   .row-eq-height {
     display: -webkit-box;

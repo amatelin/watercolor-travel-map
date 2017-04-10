@@ -22,10 +22,10 @@ class PointEditStore extends ReduceStore {
         };
       case ActionTypes.SAVE_POINT:
         Dispatcher.waitFor([PointStore.getDispatchToken()]);
-        if (!action.validationErrors) return false;
+        if (!action.validationError) return false;
         else return {
           id: state.id,
-          validationErrors: action.validationErrors
+          validationError: action.validationError
         };
       default:
         return state;

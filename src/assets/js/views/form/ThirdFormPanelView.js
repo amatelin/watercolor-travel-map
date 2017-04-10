@@ -3,24 +3,12 @@
 import React from 'react';
 import {Row, Col, Button, Panel, FormGroup, Checkbox} from 'react-bootstrap/lib';
 import Loader from './components/Loader'
-
 import Map from '../../utils/Map';
 
 function ThirdFormPanelView(props) {
-  const {mapOptions, onToggleLoader, points, routes, title, waypoints, geodesics, graphicOptions} = props;
+  const {mapOptions, onToggleLoader} = props;
   const downloadImage = () => Map.downloadImage(mapOptions, onToggleLoader);
   const onToggleMagicOption = (event) => props.onToggleMagicOption();
-
-  console.log(graphicOptions);
-  Map.generateMap({
-    points: points,
-    routes: routes,
-    title: title,
-    waypoints: waypoints,
-    geodesics: geodesics,
-    graphicOptions: graphicOptions,
-    routesWithWaypoints: props.routesWithWaypoints
-  });
 
   return (
     <div>

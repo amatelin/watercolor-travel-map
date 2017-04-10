@@ -21,7 +21,7 @@ const graphicDefaultOptions = [
   {inputType: 'bus',
   inputFamily: 'route',
   options: {
-    lineType: 'dashline',
+    lineType: 'plainline',
     color: {
       hex: '#BDA068',
       alpha: 75
@@ -30,7 +30,7 @@ const graphicDefaultOptions = [
   {inputType: 'train',
   inputFamily: 'route',
   options: {
-    lineType: 'longdash',
+    lineType: 'plainline',
     color: {
       hex: '#302814',
       alpha: 75
@@ -39,7 +39,7 @@ const graphicDefaultOptions = [
   {inputType: 'other',
   inputFamily: 'route',
   options: {
-    lineType: 'mixeddash',
+    lineType: 'dashline',
     color: {
       hex: '#BDB8AF',
       alpha: 75

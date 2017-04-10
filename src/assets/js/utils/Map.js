@@ -2,38 +2,66 @@
 
 import html2canvas from 'html2canvas';
 import FileSaver from 'file-saver';
+import Counter from './Counter';
 
 const lineSymbols = {
       plainline: {
-        path: '',
-        scale: 0,
-        repeat: 0
+        path: 'M 0 0 0 20',
+        scale: 4,
+        repeat: '00px',
+        rotate: -90,
       },
       dashline: {
-        path: 'M 0,-1 0,1',
+        path: 'M 0,-1 0, 1',
         scale: 4,
-        repeat: '20px'
+        repeat: '20px',
+        rotate: -90,
       },
       dots: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 2,
-        repeat: '15px'
+        path: 'M 1 1 a 0.5 0.5 0 1 0 0.00001 0',//google.maps.SymbolPath.CIRCLE,
+        scale: 3,
+        repeat: '15px',
+        rotate: 0,
       },
       longdash: {
         path: 'M 0, -2.5, 0, 1',
         scale: 4,
-        repeat: '25px'
+        repeat: '25px',
+        rotate: 90,
       },
       mixeddash: {
-        path: 'M 0, -2.5, 0, 1, M 0, 4, 0, 5',
+        path: 'M 0 0 0 3 M 0 6 0 7',//'M 0, -2.5, 0, 1, M 0, 4, 0, 5',
         scale: 4,
-        repeat: '40px'
+        repeat: '40px',
+        rotate: -90,
       },
       plusline: {
         path: 'M 1, 0, 1, 2, M 0, 1, 2, 1',
         scale: 3,
-        repeat: '15px'
+        repeat: '15px',
+        rotate: 0,
       }
+};
+
+const markers = {
+  startpoint: {
+    url: 'assets/images/green-cross.png',
+    scaledSize: new google.maps.Size(30, 30),
+    anchor: new google.maps.Point(15, 15),
+    labelOrigin: new google.maps.Point(15, -10),
+  },
+  endpoint: {
+    url: 'assets/images/red-cross.png',
+    scaledSize: new google.maps.Size(30, 30),
+    anchor: new google.maps.Point(15, 15),
+    labelOrigin: new google.maps.Point(15, -10),
+  },
+  waypoint: {
+    url: 'assets/images/yellow-dot.png',
+    scaledSize: new google.maps.Size(20, 20),
+    anchor: new google.maps.Point(10, 10),
+    labelOrigin: new google.maps.Point(15, -10),
+  },
 };
 
 var directionsDisplay = null;
@@ -41,46 +69,134 @@ var directionsService = null;
 var map = null;
 var graphicOptions = null;
 var googleMapsClient = null;
+var legendOptions = {
+  registered: [],
+  options: {}
+};
 
 const Map = {
 
-    addListener() {
-      google.maps.event.addDomListener(window, 'load', this.initialize);
-    },
+  addListener() {
+    const initialize = () => this.initialize(this);
+    google.maps.event.addDomListener(window, 'load', initialize);
+  },
 
-    initialize() {
-      console.log('init');
-      googleMapsClient = require('@google/maps').createClient({
-        key:  'AIzaSyBQfkTzNnYox6b-j6Byxi0Eq8wsdaxedxo',
-        Promise: Promise
-      });
-      directionsService = new google.maps.DirectionsService();
-      directionsDisplay = new google.maps.DirectionsRenderer({
-        suppressMarkers: true
-      });
+  initialize(that) {
+    legendOptions = {
+      registered: [],
+      options: {}
+    };
+
+    googleMapsClient = require('@google/maps').createClient({
+      key:  'AIzaSyBQfkTzNnYox6b-j6Byxi0Eq8wsdaxedxo',
+      Promise: Promise
+    });
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer({
+      suppressMarkers: true
+    });
 
 
-      var center = new google.maps.LatLng(52.146973, -106.647034);
-      var layer = "watercolor";
-      var mapOptions = {
-        zoom: 2,
-        center: center,
-        mapTypeId: layer,
-        mapTypeControlOptions: {
-          mapTypeIds: []
-        },
-        disableDefaultUI:true
-      };
-      map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
-      map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
-      directionsDisplay.setMap(map);
-    },
+    var center = new google.maps.LatLng(52.146973, -106.647034);
+    var layer = "watercolor";
+    var mapOptions = {
+      zoom: 2,
+      center: center,
+      mapTypeId: layer,
+      zoomControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      mapTypeControl: false
+      // disableDefaultUI:true
+    };
+
+    map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
+    map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
+    directionsDisplay.setMap(map);
+  },
+
+  generateLegend(options) {
+    var div = document.createElement('div');
+    var path = lineSymbols[options.lineType].path.replace(/\,/g, '');;
+    var scale = Number(lineSymbols[options.lineType].scale)*2;
+    var repeat = Number(lineSymbols[options.lineType].repeat.slice(0,2));
+    var rotate = lineSymbols[options.lineType].rotate;
+    var strokeWidth = 1;
+    var id = options.lineType + Counter.increment();
+
+    // dirty hack
+    switch(options.lineType) {
+      case 'mixeddash':
+        repeat = repeat*2;
+        break;
+      case 'dots':
+        strokeWidth = 0.5;
+        break;
+      case 'plusline':
+        strokeWidth = 0.5;
+        repeat = repeat * 1.5;
+        break;
+    }
+
+    var wrapper = document.createElement('div');
+    wrapper.setAttribute('class', 'row vertical-align-middle');
+
+    var canvasContainer = document.createElement('div');
+    canvasContainer.setAttribute('class', 'col-md-6');
+
+    var textContainer = document.createElement('div');
+    textContainer.setAttribute('class', 'col-md-6');
+
+    var text = document.createElement('div')
+    text.innerHTML = '<h4>&nbsp ' + options.title+ '</h4>';
+    textContainer.appendChild(text);
+    // <div class='row vertical-align-middle'>\
+    //                   <div class='col-md-6'>\
+    var svg = "<svg height='20' width='120' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'> \
+                          <defs>\
+                            <symbol id='"+ id +"'>\
+                              <g transform='scale(" + String(scale) + ") rotate("+ rotate +")'> \
+                              <path d='" + path +"' stroke='"+options.color+"' stroke-opacity='"+options.opacity/100+"' fill='"+options.color+"' stroke-width='"+ strokeWidth +"'/>\
+                              </g> \
+                            </symbol> \
+                          </defs>\
+                          <use xlink:href='#"+id+"' x='0'/>\
+                          <use xlink:href='#"+id+"' x='"+ String(repeat) +"'/>\
+                          <use xlink:href='#"+id+"' x='" + String(2*repeat) +"'/>\
+                          <use xlink:href='#"+id+"' x='" + String(3*repeat) +"'/>\
+                          <use xlink:href='#"+id+"' x='" + String(4*repeat) +"'/>\
+                          <use xlink:href='#"+id+"' x='" + String(5*repeat) +"'/>\
+                          <use xlink:href='#"+id+"' x='" + String(6*repeat) +"'/>\
+                          <use xlink:href='#"+id+"' x='" + String(7*repeat) +"'/>\
+                        </svg>";
+                    // </div> \
+                    // <div class='col-md-6'>\
+                    //   <h4> &nbsp "+options.title+"</h4>\
+                    //   </div> \
+                    // </div>
+    var canvas = document.createElement('canvas');
+    canvas.setAttribute('id', 'canvas-' + Counter.increment());
+    canvg(canvas, svg)
+
+    canvasContainer.appendChild(canvas);
+    wrapper.appendChild(canvasContainer)
+    wrapper.appendChild(textContainer);
+
+    return wrapper
+  },
 
   downloadImage(mapOptions, callback) {
+  //   var canvas = document.getElementById("canvas");
+   //
+  //  var svg = document.getElementById("map-container");
+  //  var svgWider = svg.innerHTML;
+  //  canvg(canvas, svgWider);
+
     if (mapOptions.magicOptionChecked) document.getElementById("map-container").classList.add('magic-on');
     html2canvas(document.getElementById('map-container'),
     {
       useCORS: true,
+      // allowTaint: true,
       onrendered: function(canvas)
       {
           callback();
@@ -103,16 +219,18 @@ const Map = {
   drawRoute(options, response) {
     var strokeColor;
     var strokeOpacity;
+    var path = lineSymbols[options.lineType].path;
     if (options.lineType == 'plainline') {
       strokeColor = options.color.hex;
       strokeOpacity = options.color.alpha / 100;
+      path = '';
     } else {
       strokeColor = '#FF0000';
       strokeOpacity = 0;
     }
 
     var lineSymbol = {
-      path: lineSymbols[options.lineType].path,
+      path: path,
       strokeOpacity: options.color.alpha/100,
       strokeColor: options.color.hex,
       fillOpacity: options.color.alpha/100,
@@ -172,13 +290,27 @@ const Map = {
   },
 
   processRoute(that, routeType, departureAddress, arrivalAddress, waypoints) {
+    var options = graphicOptions.find(option => {
+      return option.inputType == routeType;
+    });
+
+    if (legendOptions.registered.indexOf(routeType) === -1)  {
+      legendOptions.registered.push(routeType);
+      legendOptions.options[routeType] = {
+        title: routeType,
+        lineType: options.options.lineType,
+        color: options.options.color.hex,
+        opacity: options.options.color.alpha
+      };
+    }
+
     var waypts = [];
     for (var i = 0; i < waypoints.length; i++) {
       waypts.push({
         location: waypoints[i].address,
         stopover: false
       });
-    }
+    };
 
     var request = {
       origin: departureAddress,
@@ -189,9 +321,6 @@ const Map = {
 
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
-        var options = graphicOptions.find(option => {
-          return option.inputType == routeType;
-        });
         that.drawRoute(options.options, response);
       }
       else {
@@ -203,8 +332,18 @@ const Map = {
 
   processGeodesic(geodesic) {
     var options = graphicOptions.find(option => {
-      return option.inputType === geodesic.type;
+      return option.inputType == geodesic.type;
     });
+
+    if (legendOptions.registered.indexOf(geodesic.type) === -1)  {
+      legendOptions.registered.push(geodesic.type);
+      legendOptions.options[geodesic.type] = {
+        title: geodesic.type,
+        lineType: options.options.lineType,
+        color: options.options.color.hex,
+        opacity: options.options.color.alpha
+      };
+    }
 
     var coordinates = []
     this.geoCodeAddress(geodesic.departureAddress)
@@ -219,11 +358,41 @@ const Map = {
 
   },
 
+  processPoint(point) {
+    var coordinates;
+    this.geoCodeAddress(point.address)
+    .then(response => {
+      var coordinates = response.json.results[0].geometry.location;
+      this.drawPoint(coordinates, point.title, point.type)
+    })
+  },
+
+  drawPoint(coordinates, text, markerType) {
+    var label = {
+      color: '#4D4D4D',
+      fontFamily: 'Homemade apple',
+      fontSize: '20px',
+      fontWeight: 'bold',
+      text: text
+    }
+    var marker = new google.maps.Marker({
+    position: coordinates,
+    label: label,
+    icon: markers[markerType]
+    });
+
+    // To add the marker to the map, call setMap();
+    marker.setMap(map);
+  },
+
   generateMap(data) {
-    this.initialize();
+    // re-initialize map in case it was already generated once
+    this.initialize(this);
 
     graphicOptions = data.graphicOptions;
 
+    // Draw routes
+    // link waypoints with corresponding route
     const routesWithWaypoints = data.routesWithWaypoints(data.routes, data.waypoints);
 
     routesWithWaypoints.map(route => {
@@ -235,9 +404,20 @@ const Map = {
       this.processRoute(this, routeType, origin, destination, waypoints);
     });
 
-    data.geodesics.map(geodesic => {
-      this.processGeodesic(geodesic);
-    });
+    // Draw geodesics
+    data.geodesics.map(geodesic => this.processGeodesic(geodesic));
+
+    // Draw points
+    data.points.map(point => this.processPoint(point));
+
+    var legendContainer = document.createElement('div');
+    legendContainer.setAttribute('id', 'map-legend');
+    legendOptions.registered.map(routeType => {
+      var legendOption = this.generateLegend(legendOptions.options[routeType])
+      legendContainer.appendChild(legendOption)
+    })
+    // var legend = that.generateLegend('dots');
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendContainer);
   },
 
 }

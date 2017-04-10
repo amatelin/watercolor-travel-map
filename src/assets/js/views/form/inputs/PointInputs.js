@@ -5,15 +5,12 @@ import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-boot
 const ENTER_KEY_CODE = 13;
 
 function PointDraftInput(props) {
-  var inputs = {"latitude": null,
-                "longitude": null,
-                "title": null};
+  var inputs = {address: null,
+                title: null};
 
-  const onChange = (event) => props.onUpdatePointDraft({latitude: inputs.latitude.value,
-                                                            longitude: inputs.longitude.value,
-                                                          title: inputs.title.value});
-  const onAddPoint = () => props.onAddPoint(props.pointType, {latitude: inputs.latitude.value,
-                                                            longitude: inputs.longitude.value,
+  const onChange = (event) => props.onUpdatePointDraft({address: inputs.address.value,
+                                                        title: inputs.title.value});
+  const onAddPoint = () => props.onAddPoint(props.pointType, {address: inputs.address.value,
                                                             title: inputs.title.value});
   const onClosePointDraft = () => props.onClosePointDraft();
   const onKeyDown = (event) => {
@@ -25,31 +22,19 @@ function PointDraftInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
-          <FormGroup controlId="latitudeInput"
-          validationState={props.draft.validationErrors[0]}>
-            <ControlLabel>Latitude</ControlLabel>
+        <Col md={6}>
+          <FormGroup controlId="addressInput"
+          validationState={props.draft.validationError}>
+            <ControlLabel>Address</ControlLabel>
             <FormControl
-              inputRef={(ref) => {inputs.latitude = ref}}
-              onKeyDown={onKeyDown}
-              onChange={onChange}
-              value={props.draft.latitude}
-              type='text'></FormControl>
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup controlId="longitudeInput"
-          validationState={props.draft.validationErrors[1]}>
-            <ControlLabel>Longitude</ControlLabel>
-            <FormControl
-              inputRef={(ref) => {inputs.longitude = ref}}
+              inputRef={(ref) => {inputs.address = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
               value={props.draft.longitude}
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col md={6}>
           <FormGroup controlId="titleInput"
           validationState={null}>
             <ControlLabel>Title</ControlLabel>
@@ -74,14 +59,12 @@ function PointDraftInput(props) {
 
 function PointInput(props) {
   const {point, pointEdited} = props;
-  var inputs = {"latitude": null,
-                "longitude": null,
+  var inputs = {"address": null,
                 "title": null};
 
   const onSavePoint = () => props.onSavePoint(point.id);
-  const onChange = (event) => props.onEditPoint(point.id, {latitude: inputs.latitude.value,
-    longitude: inputs.longitude.value,
-    title: inputs.title.value});
+  const onChange = (event) => props.onEditPoint(point.id, {address: inputs.address.value,
+                                                          title: inputs.title.value});
   const onStartEditPoint = () => props.onStartEditPoint(point.id);
   const onDeletePoint = () => props.onDeletePoint(point.id);
   const onKeyDown = (event) => {
@@ -91,42 +74,27 @@ function PointInput(props) {
   };
 
   const isEdited = (point.id === pointEdited.id);
-  var validationErrors = [null,null];
-  if (isEdited && pointEdited.validationErrors) validationErrors = pointEdited.validationErrors;
+  var validationError = null;
+  if (isEdited && pointEdited.validationError) validationError = pointEdited.validationError;
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
-          <FormGroup controlId="latitudeInput"
-          validationState={validationErrors[0]}>
-            {(props.pointIndex === 1) &&
-            <ControlLabel>Latitude</ControlLabel>
-            }
-            <FormControl
-              onDoubleClick={onStartEditPoint}
-              onKeyDown={onKeyDown}
-              readOnly={!isEdited}
-              inputRef={(ref) => {inputs.latitude = ref}}
-              onChange={onChange} value={props.point.coordinates.latitude}
-              type='text'></FormControl>
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup controlId="longitudeInput"
-          validationState={validationErrors[1]}>
+        <Col md={6}>
+          <FormGroup controlId="addressInput"
+          validationState={validationError}>
             {(props.pointIndex === 1)  &&
-              <ControlLabel>Longitude</ControlLabel>
+              <ControlLabel>Address</ControlLabel>
             }
             <FormControl
               onDoubleClick={onStartEditPoint}
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
-              inputRef={(ref) => {inputs.longitude = ref}}
-              onChange={onChange} value={props.point.coordinates.longitude}
+              inputRef={(ref) => {inputs.address = ref}}
+              onChange={onChange} value={props.point.address}
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col md={6}>
           <FormGroup controlId="titleInput"
           validationState={null}>
             {(props.pointIndex === 1)  &&
@@ -160,7 +128,7 @@ function PointInputsComponent(props) {
   var points = props.points.filter(point => point.type == props.type);
   const onOpenPointDraft = () => props.onOpenPointDraft(props.type);
   var draftOn = ((props.pointDraft && props.pointDraft.pointType === props.type) ? true : false);
-  const alreadyFilled = ((props.type === 'starting point' || props.type === 'end point') && points.size > 0);
+  const alreadyFilled = ((props.type === 'startpoint' || props.type === 'endpoint') && points.size > 0);
   if(alreadyFilled) draftOn = false;
   var input = <PointDraftInput
               draft={props.pointDraft}
@@ -193,9 +161,9 @@ function PointInputs(props) {
   return (
     <div>
       <Col md={12}><h3>Points</h3></Col>
-        <PointInputsComponent type='starting point' {...props}/>
-        <PointInputsComponent type='end point' {...props}/>
-        <PointInputsComponent type='waymark' {...props}/>
+        <PointInputsComponent type='startpoint' {...props}/>
+        <PointInputsComponent type='endpoint' {...props}/>
+        <PointInputsComponent type='waypoint' {...props}/>
 
     </div>
   )

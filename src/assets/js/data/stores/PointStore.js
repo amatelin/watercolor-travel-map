@@ -17,10 +17,8 @@ class PointStore extends ReduceStore {
   }
 
   validateData(data) {
-    if (data.latitude && data.longitude) return null;
-    if (data.latitude && !data.longitude) return [null, 'error'];
-    if (!data.latitude && data.longitude) return ['error', null];
-    else return ['error', 'error'];
+    if (data.address.length > 0) return null;
+    else return 'error'
   }
 
   reduce(state, action) {
@@ -28,30 +26,27 @@ class PointStore extends ReduceStore {
       case ActionTypes.ADD_POINT:
         const id = Counter.increment();
         action.id = id;
-        var validationErrors = this.validateData(action.data);
-        if (!validationErrors) {
+        var validationError = this.validateData(action.data);
+        if (!validationError) {
           return state.set(id, new Point({
           id,
           type: action.pointType,
-          coordinates: {latitude: action.data.latitude,
-                        longitude: action.data.longitude},
+          address: action.data.address,
           title: action.data.title
         })); }
         else {
-          action.validationErrors = validationErrors;
+          action.validationError = validationError;
           return state;
         }
       case ActionTypes.EDIT_POINT:
         return state
-                .setIn([action.id, 'coordinates'], {latitude: action.data.latitude,
-                                                    longitude: action.data.longitude})
+                .setIn([action.id, 'address'], action.data.address)
                 .setIn([action.id, 'title'], action.data.title)
       case ActionTypes.SAVE_POINT:
-        var validationErrors = this.validateData({latitude: state.get(action.id).coordinates.latitude,
-                                                  longitude: state.get(action.id).coordinates.longitude});
-        if (!validationErrors) return state;
+        var validationError = this.validateData(state.get(action.id));
+        if (!validationError) return state;
         else {
-          action.validationErrors = validationErrors;
+          action.validationError = validationError;
           return state;
         }
       case ActionTypes.DELETE_POINT:
