@@ -109,7 +109,7 @@ function RouteInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col md={5}>
           {(isEdited) &&
             <Col md={12}>
               <SaveButton class='btn-block' onClick={onSaveRoute} />

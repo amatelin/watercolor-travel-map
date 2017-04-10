@@ -1,6 +1,7 @@
 'use strict'
 
 import html2canvas from 'html2canvas';
+require('./tile.stamen.js');
 import FileSaver from 'file-saver';
 import Counter from './Counter';
 

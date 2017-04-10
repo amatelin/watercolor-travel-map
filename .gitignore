@@ -3,3 +3,4 @@ bower_components
 dist
 src/assets/css
 src/assets/fonts
+.grunt

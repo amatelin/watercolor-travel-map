@@ -132,29 +132,44 @@ module.exports = function(grunt) {
                     cwd: 'src/assets/',
                     src: ['*/images'],
                     dest: 'src/assets/images'
-
                   }
 
               ]
             },
             dist: {
-                expand: true,
-                cwd: 'src/',
-                src: [
+              files: [
+                {
+                  expand: true,
+                  cwd: 'src/',
+                  src: [
                     '**',
                     '!assets/.sass-cache/',
-                    '!assets/css/**',
+                    '!assets/css/app.css',
                     '!assets/scss/**',
                     '!assets/js/**',
-                    '!assets/fonts/**',
-                    '!assets/images/**'
-                ],
-                dest: 'dist/'
+                    // '!assets/fonts/**',
+                    // '!assets/images/**'
+                  ],
+                  dest: 'dist/'
+                },
+                {
+                  expand: true,
+                  cwd: 'src/assets/scss/',
+                  src: ['rc-color-picker/assets/index.css'],
+                  dest: 'dist/assets/css/'
+                }
+              ]
             }
         },
         clean: {
             dist: ['dist']
-        }
+        },
+        'gh-pages': {
+          options: {
+            base: 'dist'
+          },
+          src: ['**']
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -163,7 +178,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-webpack');
+    grunt.loadNpmTasks('grunt-gh-pages')
 
     grunt.registerTask('dev', ['concurrent:dev']);
     grunt.registerTask('build', ['clean:dist', 'copy:dist', 'webpack:dist', 'sass:dist']);
+    grunt.registerTask('publish', ['gh-pages'])
 };
