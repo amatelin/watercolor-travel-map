@@ -77,6 +77,8 @@ function RouteInput(props) {
   }
   };
 
+  var routeWaypoints = waypoints.filter(waypoint => waypoint.routeId == route.id);
+
   const isEdited = (route.id === routeEdited.id);
   var validationErrors = [null,null];
   if (isEdited && routeEdited.validationErrors) validationErrors = routeEdited.validationErrors;
@@ -129,7 +131,7 @@ function RouteInput(props) {
           <Col md={12}>
             <DeleteButton class='btn-block' onClick={onDeleteRoute} />
           </Col>
-          {(waypoints.size < 8) &&
+          {(routeWaypoints.size < 8) &&
             <Col md={12}>
               <AddButton class='btn-block' onClick={onOpenWaypointDraft} text='waypoint' />
             </Col>
@@ -137,7 +139,7 @@ function RouteInput(props) {
         </Col>
       </Col>
       <Col md={12}>
-        <WaypointInputs {...props}/>
+        <WaypointInputs routeWaypoints={routeWaypoints} {...props}/>
       </Col>
     </div>
 

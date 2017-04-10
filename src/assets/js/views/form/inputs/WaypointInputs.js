@@ -110,7 +110,7 @@ function WaypointInput(props) {
 function WaypointInputs(props) {
   var _local_counter = 1;
   var {waypoints, waypointDraft, route} = props;
-  var routeWaypoints = waypoints.filter(waypoint => waypoint.routeId == route.id);
+  var routeWaypoints = props.routeWaypoints;
   const draftOn = (waypointDraft ? true : false);
   if (!routeWaypoints.size && waypointDraft.routeId !== route.id) return (<div></div>);
 
