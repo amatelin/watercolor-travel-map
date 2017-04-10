@@ -20,9 +20,11 @@ Web application using Google Maps and [stamen](http://stamen.com) watercolor til
 * [rc-color-picker](http://react-component.github.io/color-picker/) for the UI elements allowing to select the colors
 
 ## Building
-```grunt build
+```
+grunt build
 ```
 
 ## Credits
-Map tiles by [Stamen Design](http://stamen.com)
-Icons used as markers designed by [Freepik](http://www.freepik.com)
+Map tiles by [Stamen Design](http://stamen.com).
+
+Icons used as markers designed by [Freepik](http://www.freepik.com).
