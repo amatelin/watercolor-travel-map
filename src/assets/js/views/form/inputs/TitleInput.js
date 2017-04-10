@@ -1,7 +1,8 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
 
 function TitleDraftInputComponent(props) {
@@ -32,10 +33,10 @@ function TitleDraftInputComponent(props) {
           </FormGroup>
         </Col>
         <Col md={2}>
-          <Button onClick={onAddTitle}>Save</Button>
+          <SaveButton onClick={onAddTitle} />
         </Col>
         <Col md={2}>
-          <Button onClick={onCloseTitleDraft}>Cancel</Button>
+          <CancelButton onClick={onCloseTitleDraft} />
         </Col>
       </Col>
     </div>
@@ -76,11 +77,11 @@ function TitleInputComponent(props) {
         </Col>
         {(isEdited &&
           <Col md={2}>
-            <Button onClick={onSaveTitle}>Save</Button>
+            <SaveButton onClick={onSaveTitle} />
           </Col>
         )}
         <Col md={2}>
-          <Button onClick={onDeleteTitle}>Cancel</Button>
+          <CancelButton onClick={onDeleteTitle} />
         </Col>
       </Col>
     </div>
@@ -109,7 +110,9 @@ function TitleInput(props) {
     <div>
       <Col md={12}><h3>Map title</h3></Col>
       <Col md={12}>
-        <Button disabled={!!title || draftOn} onClick={onOpenTitleDraft}>Add title</Button>
+        <Col md={4}>
+          <AddButton class='btn-block' disabled={(!!title || draftOn)} onClick={onOpenTitleDraft} text='title' />
+        </Col>
         {(!title && draftOn) ? input : null}
         {(!!title || titleEdited) ? inputEdit : null}
       </Col>

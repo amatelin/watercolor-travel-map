@@ -1,8 +1,9 @@
 'use strict'
 
-import React from 'react'
-import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib'
-import WaypointInputs from './WaypointInputs'
+import React from 'react';
+import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
+import WaypointInputs from './WaypointInputs';
 const ENTER_KEY_CODE = 13;
 
 function RouteDraftInput(props) {
@@ -45,10 +46,10 @@ function RouteDraftInput(props) {
           </FormGroup>
         </Col>
         <Col md={2}>
-          <Button onClick={onAddRoute}>Save</Button>
+          <SaveButton onClick={onAddRoute} />
         </Col>
         <Col md={2}>
-          <Button onClick={onCloseRouteDraft}>Cancel</Button>
+          <CancelButton onClick={onCloseRouteDraft} />
         </Col>
       </Col>
     </div>
@@ -108,20 +109,26 @@ function RouteInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        {(isEdited &&
-          <Col md={2}>
-            <Button onClick={onSaveRoute}>Save</Button>
+        <Col md={4}>
+          {(isEdited) &&
+            <Col md={12}>
+              <SaveButton class='btn-block' onClick={onSaveRoute} />
+            </Col>
+          }
+          {(!isEdited) &&
+            <Col md={12}>
+              <EditButton class='btn-block' onClick={onStartEditRoute} />
+            </Col>
+          }
+          <Col md={12}>
+            <DeleteButton class='btn-block' onClick={onDeleteRoute} />
           </Col>
-        )}
-        <Col md={2}>
-          <Button onClick={onDeleteRoute}>Delete</Button>
+          {(waypoints.size < 8) &&
+            <Col md={12}>
+              <AddButton class='btn-block' onClick={onOpenWaypointDraft} text='waypoint' />
+            </Col>
+          }
         </Col>
-        {
-          (waypoints.size < 8) &&
-          <Col md={4}>
-            <Button onClick={onOpenWaypointDraft}>Add waypoint</Button>
-          </Col>
-        }
       </Col>
       <Col md={12}>
         <WaypointInputs {...props}/>
@@ -146,7 +153,9 @@ function RouteInputsComponent(props) {
 
   return (
     <Col md={12}>
-      <Button disabled={draftOn} onClick={onOpenRouteDraft}>Add {props.type} route</Button>
+      <Col md={4}>
+        <AddButton class='btn-block' disabled={draftOn} onClick={onOpenRouteDraft} text={props.type} />
+      </Col>
       {draftOn ? input : null }
 
       {routes.map(route => (

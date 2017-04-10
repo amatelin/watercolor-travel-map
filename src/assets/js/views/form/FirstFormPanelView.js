@@ -23,19 +23,6 @@ function FirstFormPanelView(props) {
       </Panel>
     </div>
   )
-  // return (
-  //   <div>
-  //     <Col md={12}>
-  //       <h2></h2>
-  //     </Col>
-  //     <Col md={12}>
-  //       <RouteInputsContainer {...props} />
-  //       <GeodesicInputsContainer {...props} />
-  //       <PointInputsContainer {...props} />
-  //       <TitleInputContainer {...props} />
-  //     </Col>
-  //   </div>
-  // )
 }
 
 export default FirstFormPanelView;

@@ -1,7 +1,8 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
 
 function GeodesicDraftInput(props) {
@@ -47,10 +48,10 @@ function GeodesicDraftInput(props) {
           </FormGroup>
         </Col>
         <Col md={2}>
-          <Button onClick={onAddGeodesic}>Save</Button>
+          <SaveButton onClick={onAddGeodesic} />
         </Col>
         <Col md={2}>
-          <Button onClick={onCloseGeodesicDraft}>Cancel</Button>
+          <CancelButton onClick={onCloseGeodesicDraft} />
         </Col>
       </Col>
     </div>
@@ -109,13 +110,18 @@ function GeodesicInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        {(isEdited &&
+        {(isEdited) &&
           <Col md={2}>
-            <Button onClick={onSaveGeodesic}>Save</Button>
+            <SaveButton onClick={onSaveGeodesic} />
           </Col>
-        )}
+        }
+        {(!isEdited) &&
+          <Col md={2}>
+            <EditButton onClick={onStartEditGeodesic} />
+          </Col>
+        }
         <Col md={2}>
-          <Button onClick={onDeleteGeodesic}>Delete</Button>
+            <DeleteButton onClick={onDeleteGeodesic} />
         </Col>
       </Col>
     </div>
@@ -138,7 +144,9 @@ function GeodesicInputsComponent(props) {
 
   return (
     <Col md={12}>
-      <Button disabled={draftOn} onClick={onOpenGeodesicDraft}>Add {props.type}</Button>
+      <Col md={4}>
+        <AddButton class='btn-block' disabled={draftOn} onClick={onOpenGeodesicDraft} text={props.type}/>
+      </Col>
       {draftOn ? input : null }
 
       {geodesics.map(geodesic => (

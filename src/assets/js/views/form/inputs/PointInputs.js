@@ -1,7 +1,8 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
 
 function PointDraftInput(props) {
@@ -47,10 +48,10 @@ function PointDraftInput(props) {
           </FormGroup>
         </Col>
         <Col md={2}>
-          <Button onClick={onAddPoint}>Save</Button>
+          <SaveButton onClick={onAddPoint} />
         </Col>
         <Col md={2}>
-          <Button onClick={onClosePointDraft}>Cancel</Button>
+          <CancelButton onClick={onClosePointDraft} />
         </Col>
       </Col>
     </div>
@@ -109,13 +110,18 @@ function PointInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        {(isEdited &&
+        {(isEdited) &&
           <Col md={2}>
-            <Button onClick={onSavePoint}>Save</Button>
+            <SaveButton onClick={onSavePoint} />
           </Col>
-        )}
+        }
+        {(!isEdited) &&
+          <Col md={2}>
+            <EditButton onClick={onStartEditPoint} />
+          </Col>
+        }
         <Col md={2}>
-          <Button onClick={onDeletePoint}>Delete</Button>
+          <DeleteButton onClick={onDeletePoint} />
         </Col>
       </Col>
     </div>
@@ -140,7 +146,9 @@ function PointInputsComponent(props) {
 
   return (
     <Col md={12}>
-      <Button disabled={alreadyFilled || draftOn} onClick={onOpenPointDraft}>Add {props.type}</Button>
+      <Col md={4}>
+        <AddButton class='btn-block' disabled={(alreadyFilled || draftOn)} onClick={onOpenPointDraft} text={props.type} />
+      </Col>
       {draftOn ? input : null }
 
       {points.map(point => (

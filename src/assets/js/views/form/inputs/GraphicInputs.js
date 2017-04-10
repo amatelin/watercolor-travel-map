@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, ControlLabel, Button} from 'react-bootstrap/lib';
+import {Row, Col, ControlLabel, Button, Glyphicon} from 'react-bootstrap/lib';
 import Select from 'react-select';
 import Utils from '../../../utils/Utils';
 import ColorPicker from 'rc-color-picker';
@@ -89,7 +89,7 @@ function GraphicInputs(props) {
   return (
     <div>
       <Col md={4}>
-        <Button onClick={onResetGraphicOptions}>Reset</Button>
+        <Button onClick={onResetGraphicOptions}><Glyphicon glyph='refresh'/> Reset</Button>
       </Col>
       {graphicOptions.map(options => (
           <div>

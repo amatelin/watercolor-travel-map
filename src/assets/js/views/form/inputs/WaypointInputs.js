@@ -1,7 +1,8 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
 
 function WaypointDraftInput(props) {
@@ -32,10 +33,10 @@ function WaypointDraftInput(props) {
           </FormGroup>
         </Col>
         <Col md={2}>
-          <Button onClick={onAddWaypoint}>Save</Button>
+          <SaveButton onClick={onAddWaypoint} />
         </Col>
         <Col md={2}>
-          <Button onClick={onCloseWaypointDraft}>Cancel</Button>
+          <CancelButton onClick={onCloseWaypointDraft} />
         </Col>
       </Col>
     </div>
@@ -62,7 +63,7 @@ function WaypointInput(props) {
   return (
     <div>
       <Col md={12}>
-        <p>Waypoint nbr. {props.waypointIndex}</p>
+        <p>Waypoint {props.waypointIndex}</p>
       </Col>
       <Col md={12} className='vertical-align-middle'>
         <Col md={4}>
@@ -82,12 +83,18 @@ function WaypointInput(props) {
               ></FormControl>
           </FormGroup>
         </Col>
-          { (isEdited) &&
+          {(isEdited) &&
             <Col md={2}>
-              <Button onClick={onSaveWaypoint}>Save</Button>
-            </Col>}
+              <SaveButton onClick={onSaveWaypoint} />
+            </Col>
+          }
+          {(!isEdited) &&
+            <Col md={2}>
+              <EditButton onClick={onStartEditWaypoint} />
+            </Col>
+          }
         <Col md={2}>
-          <Button onClick={onDeleteWaypoint}>Delete</Button>
+          <DeleteButton onClick={onDeleteWaypoint} />
         </Col>
       </Col>
     </div>
@@ -96,7 +103,6 @@ function WaypointInput(props) {
 
 function WaypointInputs(props) {
   var _local_counter = 1;
-  console.log(props)
   var {waypoints, waypointDraft, route} = props;
   var routeWaypoints = waypoints.filter(waypoint => waypoint.routeId == route.id);
   const draftOn = (waypointDraft ? true : false);

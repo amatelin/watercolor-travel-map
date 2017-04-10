@@ -98,6 +98,11 @@ html {
   height: 30px;
 }
 
+// Custom btn parameters
+.btn {
+  margin-bottom: 10px;
+}
+
 // magic related
 .magic-on {
   .gmnoprint a, .gmnoprint span {
@@ -114,7 +119,6 @@ html {
 }
 
 // Loader
-
 $green: #008744;
 $blue: #0057e7;
 $red: #d62d20;
@@ -124,8 +128,6 @@ $white: #eee;
 // scaling... any units
 $width: 100px;
 
-
-// demo-specific
 .showbox {
   position: absolute;
   top: 0;
@@ -134,7 +136,6 @@ $width: 100px;
   right: 0;
   padding: 5%;
 }
-// end demo-specific
 
 .loader {
   position: relative;
@@ -284,8 +285,10 @@ $width: 100px;
 }
 
 .navbar-brand {
+  font-family: 'Homemade apple';
   font-size: 35px;
-  margin: 25px 0 25px 15px;
+  margin: 25px 0 20px 0;
+  padding-left: 40px;
 }
 
 // legend
@@ -322,12 +325,12 @@ $width: 100px;
 
   .form-panel {
     overflow: scroll;
-    height: 645px;
+    height: 720px;
   }
 }
 
-@media (min-width: 768px) {
-  .form-panel-container {
-    margin-bottom: 20px;
-  }
-}
+// @media (min-width: 768px) {
+//   .form-panel-container {
+//     margin-bottom: 20px;
+//   }
+// }
