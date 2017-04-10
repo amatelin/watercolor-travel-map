@@ -8,14 +8,10 @@ import PointInputsContainer from '../../containers/form/inputs/PointInputsContai
 import TitleInputContainer from '../../containers/form/inputs/TitleInputContainer';
 
 function FirstFormPanelView(props) {
-  const title = (
-    <h3>First step: set up routes</h3>
-  );
-
   return (
     <div>
       <Panel className='form-panel'>
-        <h2>First step: set up routes</h2>
+        <h2>First step: add components to the map</h2>
         <RouteInputsContainer {...props} />
         <GeodesicInputsContainer {...props} />
         <PointInputsContainer {...props} />

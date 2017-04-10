@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup, OverlayTrigger, Glyphicon, Popover} from 'react-bootstrap/lib';
 import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
 
@@ -43,6 +43,7 @@ function PointDraftInput(props) {
               inputRef={(ref) => {inputs.title = ref}}
               onKeyDown={onKeyDown}
               onChange={onChange}
+              placeholder='optional'
               value={props.draft.title}
               type='text'></FormControl>
           </FormGroup>
@@ -106,7 +107,9 @@ function PointInput(props) {
               onKeyDown={onKeyDown}
               readOnly={!isEdited}
               inputRef={(ref) => {inputs.title = ref}}
-              onChange={onChange} value={props.point.title}
+              placeholder='optional'
+              onChange={onChange}
+              value={props.point.title}
               type='text'></FormControl>
           </FormGroup>
         </Col>
@@ -166,9 +169,29 @@ function PointInputsComponent(props) {
 }
 
 function PointInputs(props) {
+  var popover = (
+    <Popover
+    id="points-help-popover"
+    placement="right"
+    positionLeft={200}
+    positionTop={50}
+    title="Help: adding points"
+  >
+    <p>The start and arrival points will represented respectively as a green and red cross on the map.</p>
+    <p>The waypoints will be represented as a yellow dots.</p>
+    <p>A title can be set for any point in which case it will appear above the point.</p>
+    <p>Only one start and arrival points are allowed. Any number of waypoint can be added.</p>
+  </Popover>
+  )
+
   return (
     <div>
-      <Col md={12}><h3>Points</h3></Col>
+      <Col md={12} className='vertical-align-middle'>
+          <h3 className='pull-left'>Points {'\u00a0'}</h3>
+          <OverlayTrigger placement="right" overlay={popover}>
+            <Glyphicon glyph='question-sign'/>
+          </OverlayTrigger>
+      </Col>
         <PointInputsComponent type='startpoint' {...props}/>
         <PointInputsComponent type='endpoint' {...props}/>
         <PointInputsComponent type='waypoint' {...props}/>

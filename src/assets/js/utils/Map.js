@@ -170,6 +170,7 @@ const Map = {
 
     var canvas = document.createElement('canvas');
     canvas.setAttribute('id', 'canvas-' + Counter.increment());
+    canvas.setAttribute('class', 'svg-canvas');
     canvg(canvas, svg)
 
     canvasContainer.appendChild(canvas);

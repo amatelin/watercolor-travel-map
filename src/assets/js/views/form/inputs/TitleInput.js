@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup, OverlayTrigger, Glyphicon, Popover} from 'react-bootstrap/lib';
 import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
 
@@ -106,9 +106,26 @@ function TitleInput(props) {
                   {...props}
         />;
 
+  var popover = (
+    <Popover
+    id="points-help-popover"
+    placement="right"
+    positionLeft={200}
+    positionTop={50}
+    title="Help: adding a title"
+  >
+    <p>If set, the title will be displayed at the center top of the map.</p>
+  </Popover>
+  )
+
   return (
     <div>
-      <Col md={12}><h3>Map title</h3></Col>
+      <Col md={12} className='vertical-align-middle'>
+          <h3 className='pull-left'>Map title {'\u00a0'}</h3>
+          <OverlayTrigger placement="right" overlay={popover}>
+            <Glyphicon glyph='question-sign'/>
+          </OverlayTrigger>
+      </Col>
       <Col md={12}>
         <Col md={4}>
           <AddButton class='btn-block' disabled={(!!title || draftOn)} onClick={onOpenTitleDraft} text='title' />

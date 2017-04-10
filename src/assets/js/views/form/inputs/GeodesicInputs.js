@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup, OverlayTrigger, Glyphicon, Popover} from 'react-bootstrap/lib';
 import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
 
@@ -164,9 +164,29 @@ function GeodesicInputsComponent(props) {
 }
 
 function GeodesicInputs(props) {
+  var popover = (
+    <Popover
+    id="geodesics-help-popover"
+    placement="right"
+    positionLeft={200}
+    positionTop={50}
+    title="Help: adding geodesics"
+  >
+    <p>A geodesic is the shortest possible line between two points on a curved surface.</p>
+    <p>They are used to represent non-routed travels (ie: flights and ferry rides).</p>
+    <p>They work similarely to routes, taking a departure and arrival address as inputs.</p>
+    <p>Any number of them can be added.</p>
+  </Popover>
+  )
+
   return (
     <div>
-      <Col md={12}><h3>Geodesics</h3></Col>
+      <Col md={12} className='vertical-align-middle'>
+          <h3 className='pull-left'>Geodesics {'\u00a0'}</h3>
+          <OverlayTrigger placement="right" overlay={popover}>
+            <Glyphicon glyph='question-sign'/>
+          </OverlayTrigger>
+      </Col>
         <GeodesicInputsComponent type='flight' {...props}/>
         <GeodesicInputsComponent type='ferry' {...props}/>
     </div>

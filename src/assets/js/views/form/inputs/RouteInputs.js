@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap/lib';
+import {Row, Col, FormControl, ControlLabel, FormGroup, OverlayTrigger, Glyphicon, Popover} from 'react-bootstrap/lib';
 import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 import WaypointInputs from './WaypointInputs';
 const ENTER_KEY_CODE = 13;
@@ -173,9 +173,28 @@ function RouteInputsComponent(props) {
 }
 
 function RouteInputs(props) {
+  const popover = (
+    <Popover
+      id="routes-help-popover"
+      placement="right"
+      positionLeft={200}
+      positionTop={50}
+      title="Help: adding routes"
+    >
+      <p>To add a new route to your map, enter the address of departure and arrival.</p>
+      <p>The route between those two points will automatically be generated using google maps.</p>
+      <p>You can add waypoints through which the route should pass (with a limit of 8 per individual route).</p>
+    </Popover>
+  )
+
   return (
     <div>
-      <Col md={12}><h3>Routes</h3></Col>
+        <Col md={12} className='vertical-align-middle'>
+            <h3 className='pull-left'>Routes {'\u00a0'}</h3>
+            <OverlayTrigger placement="right" overlay={popover}>
+              <Glyphicon glyph='question-sign'/>
+            </OverlayTrigger>
+        </Col>
         <RouteInputsComponent type='cycling' {...props}/>
         <RouteInputsComponent type='bus' {...props}/>
         <RouteInputsComponent type='train' {...props}/>
