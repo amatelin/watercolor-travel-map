@@ -6775,6 +6775,7 @@ html {
     stroke: #ffa700; } }
 
 #loader-container {
+  height: 3em;
   font-size: 21px;
   text-align: center;
   animation: fadein 2s;
@@ -6846,6 +6847,17 @@ html {
   margin: 25px 0 20px 0;
   padding-left: 40px; }
 
+.navbar-header {
+  margin-bottom: 1.5em; }
+
+@media (min-width: 404px) {
+  .navbar-header {
+    margin-bottom: 1em; } }
+
+@media (min-width: 657px) {
+  .navbar-header {
+    margin-bottom: 0; } }
+
 #map-legend, #map-title {
   font-family: 'Homemade apple';
   opacity: 0.85;
@@ -6869,6 +6881,18 @@ html {
 .svg-canvas {
   margin-top: 20px; }
 
+#github-mark {
+  width: 40px;
+  height: 40px;
+  margin-top: 1em; }
+
+#map-wrapper {
+  margin-top: 3.5em; }
+
+@media (min-width: 768px) {
+  #map-wrapper {
+    margin-top: 0.5em; } }
+
 @media (min-width: 992px) {
   .row-eq-height {
     display: -webkit-box;
@@ -6877,4 +6901,15 @@ html {
     display: flex; }
   .form-panel {
     overflow: scroll;
-    height: 45.75em; } }
+    height: 45.75em; }
+  #map-wrapper {
+    margin-top: 0; } }
+
+@media (max-width: 1200px) {
+  .btn-block-md {
+    width: 100%;
+    display: block; } }
+
+@media (max-width: 768px) {
+  .navbar-right {
+    display: none; } }
