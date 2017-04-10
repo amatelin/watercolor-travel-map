@@ -4,7 +4,11 @@ import React from 'react';
 import {Row, Col, FormControl, ControlLabel, FormGroup, OverlayTrigger, Glyphicon, Popover} from 'react-bootstrap/lib';
 import {AddButton, DeleteButton, EditButton, SaveButton, CancelButton} from './components'
 const ENTER_KEY_CODE = 13;
-
+const POINTS_TITLES = {
+  startpoint: 'starting point',
+  endpoint: 'arrival point',
+  waypoint: 'waypoint'
+}
 function PointDraftInput(props) {
   var inputs = {address: null,
                 title: null};
@@ -23,7 +27,7 @@ function PointDraftInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={6}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="addressInput"
           validationState={props.draft.validationError}>
             <ControlLabel>Address</ControlLabel>
@@ -35,7 +39,7 @@ function PointDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={6}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="titleInput"
           validationState={null}>
             <ControlLabel>Title</ControlLabel>
@@ -48,11 +52,13 @@ function PointDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={2}>
-          <SaveButton onClick={onAddPoint} />
-        </Col>
-        <Col md={2}>
-          <CancelButton onClick={onClosePointDraft} />
+        <Col lg={5} md={12} sm={6} xs={6}>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <SaveButton class='btn-block-md' onClick={onAddPoint} />
+          </Col>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <CancelButton class='btn-block-md' onClick={onClosePointDraft} />
+          </Col>
         </Col>
       </Col>
     </div>
@@ -81,7 +87,7 @@ function PointInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={6}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="addressInput"
           validationState={validationError}>
             {(props.pointIndex === 1)  &&
@@ -96,7 +102,7 @@ function PointInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={6}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="titleInput"
           validationState={null}>
             {(props.pointIndex === 1)  &&
@@ -113,18 +119,20 @@ function PointInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        {(isEdited) &&
-          <Col md={2}>
-            <SaveButton onClick={onSavePoint} />
-          </Col>
-        }
-        {(!isEdited) &&
-          <Col md={2}>
-            <EditButton onClick={onStartEditPoint} />
-          </Col>
-        }
-        <Col md={2}>
-          <DeleteButton onClick={onDeletePoint} />
+        <Col lg={5} md={12} sm={6} xs={6}>
+            {(isEdited) &&
+              <Col lg={6} md={12} sm={6} xs={12}>
+                <SaveButton class='btn-block-md' onClick={onSavePoint} />
+              </Col>
+            }
+            {(!isEdited) &&
+              <Col lg={6} md={12} sm={6} xs={12}>
+                <EditButton class='btn-block-md' onClick={onStartEditPoint} />
+              </Col>
+            }
+            <Col lg={6} md={12} sm={6} xs={12}>
+              <DeleteButton class='btn-block-md' onClick={onDeletePoint} />
+            </Col>
         </Col>
       </Col>
     </div>
@@ -148,9 +156,9 @@ function PointInputsComponent(props) {
             />
 
   return (
-    <Col md={12}>
-      <Col md={4}>
-        <AddButton class='btn-block' disabled={(alreadyFilled || draftOn)} onClick={onOpenPointDraft} text={props.type} />
+    <Col lg={12} md={12} sm={12} xs={12}>
+      <Col lg={6} md={8} sm={12} xs={12}>
+        <AddButton class='btn-block' disabled={(alreadyFilled || draftOn)} onClick={onOpenPointDraft} text={POINTS_TITLES[props.type]} />
       </Col>
       {draftOn ? input : null }
 

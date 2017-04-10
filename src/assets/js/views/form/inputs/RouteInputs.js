@@ -23,10 +23,10 @@ function RouteDraftInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="departureAddressInput"
           validationState={props.draft.validationErrors[0]}>
-            <ControlLabel>Departure address</ControlLabel>
+            <ControlLabel>Departure from</ControlLabel>
             <FormControl inputRef={(ref) => {inputs.departureAddress = ref}}
               onChange={onChange}
               onKeyDown={onKeyDown}
@@ -34,10 +34,10 @@ function RouteDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="departureAddressInput"
           validationState={props.draft.validationErrors[1]}>
-            <ControlLabel>Arrival address</ControlLabel>
+            <ControlLabel>Arrival at</ControlLabel>
             <FormControl inputRef={(ref) => {inputs.arrivalAddress = ref}}
               onChange={onChange}
               onKeyDown={onKeyDown}
@@ -45,11 +45,13 @@ function RouteDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={2}>
-          <SaveButton onClick={onAddRoute} />
-        </Col>
-        <Col md={2}>
-          <CancelButton onClick={onCloseRouteDraft} />
+        <Col lg={5} md={12} sm={6} xs={6}>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <SaveButton class='btn-block-md' onClick={onAddRoute} />
+          </Col>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <CancelButton class='btn-block-md' onClick={onCloseRouteDraft} />
+          </Col>
         </Col>
       </Col>
     </div>
@@ -79,11 +81,11 @@ function RouteInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col md={4} sm={6} xs={6}>
           <FormGroup controlId="departureAddressInput"
           validationState={validationErrors[0]}>
             {(props.routeIndex === 1) &&
-            <ControlLabel>Departure address</ControlLabel>
+            <ControlLabel>Departure from</ControlLabel>
             }
             <FormControl
               onDoubleClick={onStartEditRoute}
@@ -94,11 +96,11 @@ function RouteInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col md={4} sm={6} xs={6}>
           <FormGroup controlId="departureAddressInput"
           validationState={validationErrors[1]}>
             {(props.routeIndex === 1)  &&
-              <ControlLabel>Arrival address</ControlLabel>
+              <ControlLabel>Arrival at</ControlLabel>
             }
             <FormControl
               onDoubleClick={onStartEditRoute}
@@ -109,7 +111,7 @@ function RouteInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={5}>
+        <Col lg={5} md={8} sm={12} xs={12}>
           {(isEdited) &&
             <Col md={12}>
               <SaveButton class='btn-block' onClick={onSaveRoute} />
@@ -152,8 +154,8 @@ function RouteInputsComponent(props) {
             />
 
   return (
-    <Col md={12}>
-      <Col md={4}>
+    <Col lg={12} md={12} sm={12} xs={12}>
+      <Col lg={6} md={8} sm={12} xs={12}>
         <AddButton class='btn-block' disabled={draftOn} onClick={onOpenRouteDraft} text={props.type} />
       </Col>
       {draftOn ? input : null }

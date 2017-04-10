@@ -209,6 +209,7 @@ $width: 100px;
 }
 
 #loader-container {
+    height: 3em;
     font-size: 21px;
     text-align: center;
     animation: fadein 2s;
@@ -292,6 +293,22 @@ $width: 100px;
   padding-left: 40px;
 }
 
+.navbar-header {
+  margin-bottom: 1.5em;
+}
+
+@media (min-width: 404px) {
+  .navbar-header {
+    margin-bottom: 1em;
+  }
+}
+
+@media (min-width: 657px) {
+  .navbar-header {
+    margin-bottom: 0;
+  }
+}
+
 // legend
 #map-legend, #map-title {
   font-family: 'Homemade apple';
@@ -320,6 +337,18 @@ $width: 100px;
   margin-top: 20px;
 }
 
+// Responsiveness
+#map-wrapper {
+  margin-top: 3.5em;
+}
+
+
+@media (min-width: 768px) {
+  #map-wrapper {
+    margin-top: 0.5em;
+  }
+}
+
 @media (min-width: 992px) {
   .row-eq-height {
     display: -webkit-box;
@@ -332,7 +361,26 @@ $width: 100px;
     overflow: scroll;
     height: 45.75em;
   }
+
+  #map-wrapper {
+    margin-top: 0;
+  }
 }
+
+@media (max-width: 1200px) {
+  .btn-block-md {
+    width:100%;
+    display:block;
+  }
+}
+
+// @media (max-width: 992px) {
+//   .btn-block-md {
+//     display:inherit;
+//   }
+// }
+
+
 
 // @media (min-width: 768px) {
 //   .form-panel-container {

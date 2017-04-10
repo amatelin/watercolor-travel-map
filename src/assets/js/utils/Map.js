@@ -190,7 +190,7 @@ const Map = {
       {
           callback();
           canvas.toBlob(function(blob) {
-          FileSaver.saveAs(blob, "Map.png")
+          FileSaver.saveAs(blob, "My-travel-map.png")
         })
       }
     });

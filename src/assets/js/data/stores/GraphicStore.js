@@ -41,8 +41,8 @@ const graphicDefaultOptions = [
   options: {
     lineType: 'dashline',
     color: {
-      hex: '#BDB8AF',
-      alpha: 75
+      hex: '#FFFFFF',
+      alpha: 100
     }
   }},
   {inputType: 'flight',
@@ -50,7 +50,7 @@ const graphicDefaultOptions = [
   options: {
     lineType: 'dots',
     color: {
-      hex: '#0042ad',
+      hex: '#1169F7 ',
       alpha: 100
     }
   }},
@@ -59,7 +59,7 @@ const graphicDefaultOptions = [
   options: {
     lineType: 'plusline',
     color: {
-      hex: '#6C9EF0',
+      hex: '#1D3357',
       alpha: 100
     }
   }},

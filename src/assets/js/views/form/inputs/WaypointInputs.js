@@ -20,10 +20,10 @@ function WaypointDraftInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="waypointInput"
             validationState={props.draft.validationError}>
-            <ControlLabel>Waypoint address</ControlLabel>
+            <ControlLabel>Location</ControlLabel>
             <FormControl
               inputRef={(ref) => {addressInput = ref}}
               onKeyDown={onKeyDown}
@@ -32,11 +32,13 @@ function WaypointDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={2}>
-          <SaveButton onClick={onAddWaypoint} />
-        </Col>
-        <Col md={2}>
-          <CancelButton onClick={onCloseWaypointDraft} />
+        <Col lg={5} md={12} sm={6} xs={6}>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <SaveButton class='btn-block-md' onClick={onAddWaypoint} />
+          </Col>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <CancelButton class='btn-block-md' onClick={onCloseWaypointDraft} />
+          </Col>
         </Col>
       </Col>
     </div>
@@ -66,11 +68,11 @@ function WaypointInput(props) {
         <p>Waypoint {props.waypointIndex}</p>
       </Col>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="waypointInput"
             validationState={validationError}>
             {(props.waypointIndex === 1) &&
-              <ControlLabel>Waypoint address</ControlLabel>
+              <ControlLabel>Location</ControlLabel>
             }
             <FormControl
               inputRef={(ref) => {addressInput = ref}}
@@ -83,18 +85,20 @@ function WaypointInput(props) {
               ></FormControl>
           </FormGroup>
         </Col>
+        <Col lg={5} md={12} sm={6} xs={6}>
           {(isEdited) &&
-            <Col md={2}>
-              <SaveButton onClick={onSaveWaypoint} />
+            <Col lg={6} md={12} sm={6} xs={12}>
+              <SaveButton class='btn-block-md' onClick={onSaveWaypoint} />
             </Col>
           }
           {(!isEdited) &&
-            <Col md={2}>
-              <EditButton onClick={onStartEditWaypoint} />
+            <Col lg={6} md={12} sm={6} xs={12}>
+              <EditButton class='btn-block-md' onClick={onStartEditWaypoint} />
             </Col>
           }
-        <Col md={2}>
-          <DeleteButton onClick={onDeleteWaypoint} />
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <DeleteButton class='btn-block-md' onClick={onDeleteWaypoint} />
+          </Col>
         </Col>
       </Col>
     </div>

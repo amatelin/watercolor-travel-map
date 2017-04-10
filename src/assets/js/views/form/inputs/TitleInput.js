@@ -63,7 +63,7 @@ function TitleInputComponent(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col lg={6} md={6} sm={6} xs={6}>
           <FormGroup controlId="titleInput"
           validationState={validationError}>
             <FormControl
@@ -75,13 +75,15 @@ function TitleInputComponent(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        {(isEdited &&
-          <Col md={2}>
-            <SaveButton onClick={onSaveTitle} />
+        <Col lg={5} md={12} sm={6} xs={6}>
+          {(isEdited &&
+            <Col lg={6} md={12} sm={6} xs={12}>
+              <SaveButton onClick={onSaveTitle} />
+            </Col>
+          )}
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <CancelButton onClick={onDeleteTitle} />
           </Col>
-        )}
-        <Col md={2}>
-          <CancelButton onClick={onDeleteTitle} />
         </Col>
       </Col>
     </div>
@@ -126,8 +128,8 @@ function TitleInput(props) {
             <Glyphicon glyph='question-sign'/>
           </OverlayTrigger>
       </Col>
-      <Col md={12}>
-        <Col md={4}>
+      <Col lg={12} md={12} sm={12} xs={12}>
+        <Col lg={6} md={8} sm={12} xs={12}>
           <AddButton class='btn-block' disabled={(!!title || draftOn)} onClick={onOpenTitleDraft} text='title' />
         </Col>
         {(!title && draftOn) ? input : null}

@@ -7,7 +7,7 @@ function CancelButton(props) {
 
   return (
     <div>
-      <Button onClick={props.onClick}><Glyphicon glyph="remove-sign" /> Cancel</Button>
+      <Button className={props.class} onClick={props.onClick}><Glyphicon glyph="remove-sign" /> Cancel</Button>
     </div>
   )
 }

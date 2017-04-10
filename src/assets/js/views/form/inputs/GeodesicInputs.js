@@ -23,10 +23,10 @@ function GeodesicDraftInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="departureInput"
           validationState={props.draft.validationErrors[0]}>
-            <ControlLabel>Departure</ControlLabel>
+            <ControlLabel>Departure location</ControlLabel>
             <FormControl
               inputRef={(ref) => {inputs.departureAddress = ref}}
               onKeyDown={onKeyDown}
@@ -35,10 +35,10 @@ function GeodesicDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col lg={4} md={6} sm={6} xs={6}>
           <FormGroup controlId="arrivalInput"
           validationState={props.draft.validationErrors[1]}>
-            <ControlLabel>Arrival</ControlLabel>
+            <ControlLabel>Arrival location</ControlLabel>
             <FormControl
               inputRef={(ref) => {inputs.arrivalAddress = ref}}
               onKeyDown={onKeyDown}
@@ -47,11 +47,13 @@ function GeodesicDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={2}>
-          <SaveButton onClick={onAddGeodesic} />
-        </Col>
-        <Col md={2}>
-          <CancelButton onClick={onCloseGeodesicDraft} />
+        <Col lg={5} md={12} sm={6} xs={6}>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <SaveButton class='btn-block-md' onClick={onAddGeodesic} />
+          </Col>
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <CancelButton class='btn-block-md' onClick={onCloseGeodesicDraft} />
+          </Col>
         </Col>
       </Col>
     </div>
@@ -80,7 +82,7 @@ function GeodesicInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col md={4} sm={6} xs={6}>
           <FormGroup controlId="departureAddressInput"
           validationState={validationErrors[0]}>
             {(props.geodesicIndex === 1) &&
@@ -95,7 +97,7 @@ function GeodesicInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col md={4} sm={6} xs={6}>
           <FormGroup controlId="arrivalAddressInput"
           validationState={validationErrors[1]}>
             {(props.geodesicIndex === 1)  &&
@@ -110,18 +112,20 @@ function GeodesicInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        {(isEdited) &&
-          <Col md={2}>
-            <SaveButton onClick={onSaveGeodesic} />
+        <Col lg={5} md={8} sm={12} xs={12}>
+          {(isEdited) &&
+            <Col lg={6} md={12} sm={6} xs={12}>
+              <SaveButton class='btn-block-md' onClick={onSaveGeodesic} />
+            </Col>
+          }
+          {(!isEdited) &&
+            <Col lg={6} md={12} sm={6} xs={12}>
+              <EditButton class='btn-block-md' onClick={onStartEditGeodesic} />
+            </Col>
+          }
+          <Col lg={6} md={12} sm={6} xs={12}>
+            <DeleteButton class='btn-block-md' onClick={onDeleteGeodesic} />
           </Col>
-        }
-        {(!isEdited) &&
-          <Col md={2}>
-            <EditButton onClick={onStartEditGeodesic} />
-          </Col>
-        }
-        <Col md={2}>
-            <DeleteButton onClick={onDeleteGeodesic} />
         </Col>
       </Col>
     </div>
@@ -143,8 +147,8 @@ function GeodesicInputsComponent(props) {
             />
 
   return (
-    <Col md={12}>
-      <Col md={4}>
+    <Col lg={12} md={12} sm={12} xs={12}>
+      <Col lg={6} md={8} sm={12} xs={12}>
         <AddButton class='btn-block' disabled={draftOn} onClick={onOpenGeodesicDraft} text={props.type}/>
       </Col>
       {draftOn ? input : null }

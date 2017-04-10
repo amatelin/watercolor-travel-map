@@ -20,8 +20,8 @@ function GenerateMapButton(props) {
   };
 
   return (
-      <Col md={6} sm={6}>
-        <Button className='btn-block' onClick={onGenerateMap}>Generate Map <Glyphicon glyph="cog" /></Button>
+      <Col md={6} sm={6} xs={6}>
+        <Button className='btn-block' onClick={onGenerateMap} bsStyle='primary'>Generate Map <Glyphicon glyph="cog" /></Button>
       </Col>
   )
 }

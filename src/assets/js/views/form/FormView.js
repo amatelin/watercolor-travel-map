@@ -68,7 +68,7 @@ function NavButtonBlock(props) {
 
 function NextStepButton(props) {
   return (
-    <Col className={props.className} md={6} sm={6}>
+    <Col className={props.className} md={6} sm={6} xs={6}>
       <Button className='btn-block' onClick={props.onNextStep}>Next step <Glyphicon glyph="chevron-right" /></Button>
     </Col>
   )
@@ -76,18 +76,10 @@ function NextStepButton(props) {
 
 function PreviousStepButton(props) {
   return (
-    <Col md={6} sm={6}>
+    <Col md={6} sm={6} xs={6}>
       <Button className='btn-block' onClick={props.onPreviousStep}><Glyphicon glyph="chevron-left" /> Previous step</Button>
     </Col>
   )
 }
-
-// function GenerateMapButton(props) {
-//   return (
-//     <Col md={6} sm={6}>
-//       <Button className='btn-block' onClick={props.onNextStep}>Generate Map <Glyphicon glyph="cog" /></Button>
-//     </Col>
-//   )
-// }
 
 export default FormView;

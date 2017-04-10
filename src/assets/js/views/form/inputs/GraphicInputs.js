@@ -89,7 +89,7 @@ function GraphicInputs(props) {
   return (
     <div>
       <Col md={4}>
-        <Button onClick={onResetGraphicOptions}><Glyphicon glyph='refresh'/> Default</Button>
+        <Button bsStyle='warning' onClick={onResetGraphicOptions}><Glyphicon glyph='refresh'/> Default</Button>
       </Col>
       {graphicOptions.map(options => (
           <div>
