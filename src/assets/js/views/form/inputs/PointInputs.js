@@ -11,7 +11,7 @@ const POINTS_TITLES = {
 }
 function PointDraftInput(props) {
   var inputs = {address: null,
-                title: null};
+                title: ''};
 
   const onChange = (event) => props.onUpdatePointDraft({address: inputs.address.value,
                                                         title: inputs.title.value});
@@ -69,7 +69,7 @@ function PointDraftInput(props) {
 function PointInput(props) {
   const {point, pointEdited} = props;
   var inputs = {"address": null,
-                "title": null};
+                "title": ''};
 
   const onSavePoint = () => props.onSavePoint(point.id);
   const onChange = (event) => props.onEditPoint(point.id, {address: inputs.address.value,

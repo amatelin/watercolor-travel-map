@@ -6,7 +6,7 @@ import {Navbar, Nav, NavItem, Col, Image} from 'react-bootstrap/lib';
 function GithubMark() {
   return (
     <div>
-      <Image id='github-mark' src="/assets/images/github-mark.png" circle />
+      <Image id='github-mark' src="assets/images/github-mark.png" circle />
     </div>
   )
 }

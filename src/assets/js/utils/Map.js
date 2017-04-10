@@ -357,6 +357,9 @@ const Map = {
   },
 
   drawPoint(coordinates, text, markerType) {
+    // silly hack because otherwise when empty the text will be [object Object]
+    if (text.length === 0) text = ' ';
+
     var label = {
       color: '#4D4D4D',
       fontFamily: 'Homemade apple',
@@ -370,7 +373,6 @@ const Map = {
     icon: markers[markerType]
     });
 
-    // To add the marker to the map, call setMap();
     marker.setMap(map);
   },
 
