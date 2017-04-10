@@ -254,19 +254,19 @@ $width: 100px;
 
 #main {
   overflow:auto;
-  padding-bottom: 125px; /* this needs to be bigger than footer height*/
+  padding-bottom: 156px; /* this needs to be bigger than footer height*/
 }
 
 .footer {
   position: relative;
-  margin-top: -125px; /* negative value of footer height */
-  height: 125px;
+  margin-top: -156px; /* negative value of footer height */
+  height: 156px;
   clear:both;
   background-color: #f5f5f5;
 }
 
 .credit {
-  margin-top: 3%;
+  margin-top: 2.75%;
 }
 
 // App container
@@ -289,11 +289,27 @@ $width: 100px;
 }
 
 // legend
-#map-legend h4 {
+#map-legend, #map-title {
   font-family: 'Homemade apple';
-  font-size: 20px;
+  opacity: 0.85;
+  color: black;
   font-weight: bold;
-  opacity: 0.75
+}
+#map-legend h4 {
+  font-size: 20px;
+  opacity: inherit;
+  color: inherit;
+  font-weight: inherit;
+}
+
+#map-title {
+  h2 {
+    font-size: 30px;
+    opacity: inherit;
+    color: inherit;
+    font-weight: inherit;
+  }
+  padding-top: 25px
 }
 
 @media (min-width: 992px) {

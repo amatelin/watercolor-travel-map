@@ -18,7 +18,7 @@ const lineSymbols = {
         rotate: -90,
       },
       dots: {
-        path: 'M 1 1 a 0.5 0.5 0 1 0 0.00001 0',//google.maps.SymbolPath.CIRCLE,
+        path: 'M 1 1 a 0.5 0.5 0 1 0 0.00001 0',
         scale: 3,
         repeat: '15px',
         rotate: 0,
@@ -30,7 +30,7 @@ const lineSymbols = {
         rotate: 90,
       },
       mixeddash: {
-        path: 'M 0 0 0 3 M 0 6 0 7',//'M 0, -2.5, 0, 1, M 0, 4, 0, 5',
+        path: 'M 0 0 0 3 M 0 6 0 7',
         scale: 4,
         repeat: '40px',
         rotate: -90,
@@ -107,7 +107,6 @@ const Map = {
       scaleControl: false,
       streetViewControl: false,
       mapTypeControl: false
-      // disableDefaultUI:true
     };
 
     map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
@@ -150,8 +149,7 @@ const Map = {
     var text = document.createElement('div')
     text.innerHTML = '<h4>&nbsp ' + options.title+ '</h4>';
     textContainer.appendChild(text);
-    // <div class='row vertical-align-middle'>\
-    //                   <div class='col-md-6'>\
+
     var svg = "<svg height='20' width='120' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'> \
                           <defs>\
                             <symbol id='"+ id +"'>\
@@ -169,11 +167,7 @@ const Map = {
                           <use xlink:href='#"+id+"' x='" + String(6*repeat) +"'/>\
                           <use xlink:href='#"+id+"' x='" + String(7*repeat) +"'/>\
                         </svg>";
-                    // </div> \
-                    // <div class='col-md-6'>\
-                    //   <h4> &nbsp "+options.title+"</h4>\
-                    //   </div> \
-                    // </div>
+
     var canvas = document.createElement('canvas');
     canvas.setAttribute('id', 'canvas-' + Counter.increment());
     canvg(canvas, svg)
@@ -186,17 +180,10 @@ const Map = {
   },
 
   downloadImage(mapOptions, callback) {
-  //   var canvas = document.getElementById("canvas");
-   //
-  //  var svg = document.getElementById("map-container");
-  //  var svgWider = svg.innerHTML;
-  //  canvg(canvas, svgWider);
-
     if (mapOptions.magicOptionChecked) document.getElementById("map-container").classList.add('magic-on');
     html2canvas(document.getElementById('map-container'),
     {
       useCORS: true,
-      // allowTaint: true,
       onrendered: function(canvas)
       {
           callback();
@@ -385,6 +372,13 @@ const Map = {
     marker.setMap(map);
   },
 
+  addTitle(title) {
+    var mapTitle = document.createElement('div');
+    mapTitle.setAttribute('id', 'map-title');
+    mapTitle.innerHTML = '<h2>' + title + '</h2>'
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(mapTitle);
+  },
+
   generateMap(data) {
     // re-initialize map in case it was already generated once
     this.initialize(this);
@@ -416,8 +410,10 @@ const Map = {
       var legendOption = this.generateLegend(legendOptions.options[routeType])
       legendContainer.appendChild(legendOption)
     })
-    // var legend = that.generateLegend('dots');
+
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendContainer);
+
+    if (data.title) this.addTitle(data.title);
   },
 
 }

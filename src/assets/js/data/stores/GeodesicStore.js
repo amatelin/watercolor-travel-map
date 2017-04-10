@@ -44,8 +44,8 @@ class GeodesicStore extends ReduceStore {
         }
       case ActionTypes.EDIT_GEODESIC:
         return state
-                .setIn([action.id, departureAddress], action.data.departureAddress)
-                .setIn([action.id, arrivalAddress], action.data.arrivalAddress)
+                .setIn([action.id, 'departureAddress'], action.data.departureAddress)
+                .setIn([action.id, 'arrivalAddress'], action.data.arrivalAddress)
       case ActionTypes.SAVE_GEODESIC:
         var validationErrors = this.validateData({departureAddress: state.get(action.id).departureAddress,
                                                   arrivalAddress: state.get(action.id).arrivalAddress});
