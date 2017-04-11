@@ -157,6 +157,12 @@ module.exports = function(grunt) {
                   cwd: 'src/assets/scss/',
                   src: ['rc-color-picker/assets/index.css'],
                   dest: 'dist/assets/css/'
+                },
+                {
+                  expand: true,
+                  cwd: 'src/assets/scss/',
+                  src: ['tether-shepherd/*'],
+                  dest: 'dist/assets/css/'
                 }
               ]
             }

@@ -529,6 +529,7 @@ Tour.addStep('twentieth-step-demo', {
 });
 
 Tour.on('complete', function() {
+  document.getElementsByTagName('body')[0].removeAttribute('class');
   WaypointActions.deleteAllWaypoints();
   RouteActions.deleteAllRoutes();
   GeodesicActions.deleteAllGeodesics();
@@ -539,12 +540,13 @@ Tour.on('complete', function() {
 });
 
 Tour.on('cancel', function() {
+  document.getElementsByTagName('body')[0].removeAttribute('class');
   WaypointActions.deleteAllWaypoints();
   RouteActions.deleteAllRoutes();
   GeodesicActions.deleteAllGeodesics();
   PointActions.deleteAllPoints();
   TitleActions.deleteTitle();
-  FormStateActions.toState(0);
+  FormStateActions.toStep(0);
   Map.initialize();
 });
 
