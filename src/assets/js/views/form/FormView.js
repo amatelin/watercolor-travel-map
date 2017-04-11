@@ -6,6 +6,7 @@ import FirstFormPanelView from './FirstFormPanelView';
 import SecondFormPanelView from './SecondFormPanelView';
 import ThirdFormPanelContainer from '../../containers/form/ThirdFormPanelContainer';
 import GenerateMapButtonContainer from '../../containers/form/GenerateMapButtonContainer';
+
 function FormView(props) {
   var panel;
   switch(props.formIndex) {
@@ -38,7 +39,7 @@ function NavButtonBlock(props) {
     case 0:
       buttons = [
         null,
-        <NextStepButton className='pull-right' {...props}/>
+        <NextStepButton className='pull-right view-block' {...props}/>
       ]
       break;
     case 1:
@@ -68,7 +69,7 @@ function NavButtonBlock(props) {
 
 function NextStepButton(props) {
   return (
-    <Col className={props.className} md={6} sm={6} xs={6}>
+    <Col className={props.className} md={6} sm={6} xs={6} id='next-step-button'>
       <Button className='btn-block' onClick={props.onNextStep}>Next step <Glyphicon glyph="chevron-right" /></Button>
     </Col>
   )
@@ -76,7 +77,7 @@ function NextStepButton(props) {
 
 function PreviousStepButton(props) {
   return (
-    <Col md={6} sm={6} xs={6}>
+    <Col md={6} sm={6} xs={6} className='view-block' id='previous-step-button'>
       <Button className='btn-block' onClick={props.onPreviousStep}><Glyphicon glyph="chevron-left" /> Previous step</Button>
     </Col>
   )

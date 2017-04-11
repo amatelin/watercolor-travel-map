@@ -15,6 +15,11 @@ const RouteActions = {
       id: id
     });
   },
+  deleteAllRoutes() {
+    Dispatcher.dispatch({
+      type: ActionTypes.DELETE_ALL_ROUTES,
+    });
+  },
   startEditRoute(id) {
     Dispatcher.dispatch({
       type: ActionTypes.START_EDIT_ROUTE,

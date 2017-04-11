@@ -15,6 +15,11 @@ const GeodesicActions = {
       id: id
     });
   },
+  deleteAllGeodesics() {
+    Dispatcher.dispatch({
+      type: ActionTypes.DELETE_ALL_GEODESICS,
+    });
+  },
   startEditGeodesic(id) {
     Dispatcher.dispatch({
       type: ActionTypes.START_EDIT_GEODESIC,

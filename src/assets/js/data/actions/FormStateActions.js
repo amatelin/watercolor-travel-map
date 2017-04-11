@@ -11,6 +11,12 @@ const FormStateActions = {
     Dispatcher.dispatch({
       type: ActionTypes.TO_PREVIOUS_STEP
     });
+  },
+  toStep(stepIndex) {
+    Dispatcher.dispatch({
+      type: ActionTypes.TO_STEP,
+      stepIndex: stepIndex
+    })
   }
 }
 

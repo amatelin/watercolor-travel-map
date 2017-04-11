@@ -151,7 +151,7 @@ function GeodesicInputsComponent(props) {
             />
 
   return (
-    <Col lg={12} md={12} sm={12} xs={12}>
+    <Col lg={12} md={12} sm={12} xs={12} id={'geodesic-input-'+props.type} className='view-block'>
       <Col lg={6} md={8} sm={12} xs={12}>
         <AddButton class='btn-block' disabled={draftOn} onClick={onOpenGeodesicDraft} text={props.type}/>
       </Col>
@@ -189,14 +189,14 @@ function GeodesicInputs(props) {
 
   return (
     <div>
-      <Col md={12} className='vertical-align-middle'>
+      <Col md={12} className='vertical-align-middle view-block'>
           <h3 className='pull-left'>Geodesics {'\u00a0'}</h3>
           <OverlayTrigger placement="right" overlay={popover}>
             <Glyphicon glyph='question-sign'/>
           </OverlayTrigger>
       </Col>
-        <GeodesicInputsComponent type='flight' {...props}/>
-        <GeodesicInputsComponent type='ferry' {...props}/>
+      <GeodesicInputsComponent type='ferry' {...props}/>
+      <GeodesicInputsComponent type='flight' {...props}/>
     </div>
   )
 }

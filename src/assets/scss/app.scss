@@ -2,6 +2,9 @@
 
 @import "normalize";
 
+@import 'tether-shepherd/shepherd-theme-arrows.css';
+@import 'tether-shepherd/shepherd-theme-arrows-fix.css';
+
 @import "bootswatch/lumen/_variables.scss";
 @import "bootstrap/assets/stylesheets/_bootstrap.scss";
 @import "bootswatch/lumen/_bootswatch.scss";
@@ -385,4 +388,41 @@ $width: 100px;
   .navbar-right {
     display:none;
   }
+}
+
+// Demo specific w. shepherd
+body.shepherd-active .view-block {
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.shepherd-target.shepherd-enabled:not(body) {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.shepherd-target.shepherd-enabled:not(body) div > *{
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.shepherd-element.shepherd-theme-arrows .shepherd-content footer .shepherd-buttons li .shepherd-button.btn-default
+ {
+  @extend .btn-default;
+}
+
+.shepherd-element.shepherd-theme-arrows .shepherd-content footer .shepherd-buttons li .shepherd-button.btn-primary
+ {
+  @extend .btn-primary;
+}
+
+.shepherd-element.shepherd-theme-arrows .shepherd-content footer .shepherd-buttons li .shepherd-button.btn-success
+ {
+  @extend .btn-success;
+}
+
+.shepherd-element.shepherd-theme-arrows.demo-content .shepherd-content {
+  max-width:400px;
 }

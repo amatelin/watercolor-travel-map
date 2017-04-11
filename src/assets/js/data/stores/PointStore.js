@@ -51,6 +51,8 @@ class PointStore extends ReduceStore {
         }
       case ActionTypes.DELETE_POINT:
         return state.delete(action.id);
+      case ActionTypes.DELETE_ALL_POINTS:
+        return state.clear();
       default:
         return state;
     }

@@ -160,7 +160,7 @@ function RouteInputsComponent(props) {
             />
 
   return (
-    <Col lg={12} md={12} sm={12} xs={12}>
+    <Col lg={12} md={12} sm={12} xs={12} className='view-block' id={'route-input-'+props.type}>
       <Col lg={6} md={8} sm={12} xs={12}>
         <AddButton class='btn-block' disabled={draftOn} onClick={onOpenRouteDraft} text={props.type} />
       </Col>
@@ -181,7 +181,7 @@ function RouteInputsComponent(props) {
 }
 
 function RouteInputs(props) {
-  const popover = (
+    const popover = (
     <Popover
       id="routes-help-popover"
       placement="right"
@@ -197,16 +197,16 @@ function RouteInputs(props) {
 
   return (
     <div>
-        <Col md={12} className='vertical-align-middle'>
+        <Col id='route-inputs-title' md={12} className='vertical-align-middle view-block'>
             <h3 className='pull-left'>Routes {'\u00a0'}</h3>
             <OverlayTrigger placement="right" overlay={popover}>
               <Glyphicon glyph='question-sign'/>
             </OverlayTrigger>
         </Col>
-        <RouteInputsComponent type='cycling' {...props}/>
-        <RouteInputsComponent type='bus' {...props}/>
-        <RouteInputsComponent type='train' {...props}/>
-        <RouteInputsComponent type='other' {...props}/>
+          <RouteInputsComponent type='cycling' {...props}/>
+          <RouteInputsComponent type='train' {...props}/>
+          <RouteInputsComponent type='bus' {...props}/>
+          <RouteInputsComponent type='other' {...props}/>
     </div>
   )
 }

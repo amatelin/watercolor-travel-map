@@ -27,15 +27,15 @@ function ThirdFormPanelView(props) {
   return (
     <div>
       <Panel className='form-panel'>
-        <Col md={12} className='vertical-align-middle'>
+        <Col md={12} className='vertical-align-middle view-block'>
             <h2 className='pull-left'>Get your map {'\u00a0'}</h2>
             <OverlayTrigger placement="right" overlay={popover}>
               <Glyphicon glyph='question-sign'/>
             </OverlayTrigger>
         </Col>
-        <Col md={12} sm={12}>
+        <Col md={12} sm={12} className='view-block' id='download-button-container'>
           <Col md={6} sm={6}>
-            <Button id='test' onClick={downloadImage} className='btn-block btn-success'>Download file</Button>
+            <Button onClick={downloadImage} className='btn-block btn-success'>Download file</Button>
               <FormGroup>
                 <Checkbox checked={mapOptions.magicOptionChecked} onChange={onToggleMagicOption}>
                   It is illegal to check this option (my lawers told me so).

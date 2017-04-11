@@ -15,6 +15,11 @@ const WaypointActions = {
       id: id
     });
   },
+  deleteAllWaypoints() {
+    Dispatcher.dispatch({
+      type: ActionTypes.DELETE_ALL_WAYPOINTS,
+    });
+  },
   startEditWaypoint(id) {
     Dispatcher.dispatch({
       type: ActionTypes.START_EDIT_WAYPOINT,

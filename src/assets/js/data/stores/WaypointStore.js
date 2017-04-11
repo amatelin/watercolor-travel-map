@@ -51,6 +51,8 @@ class WaypointStore extends ReduceStore {
         }
       case ActionTypes.DELETE_WAYPOINT:
         return state.delete(action.id);
+      case ActionTypes.DELETE_ALL_WAYPOINTS:
+        return state.clear();
       default:
         return state;
     }

@@ -20,7 +20,7 @@ function SecondFormPanelView() {
 
   return (
     <div>
-      <Panel className='form-panel'>
+      <Panel className='form-panel view-block' id='second-step-form-panel'>
         <Col md={12} className='vertical-align-middle'>
             <h2 className='pull-left'>Second step: set-up graphic parameters {'\u00a0'}</h2>
             <OverlayTrigger placement="right" overlay={popover}>

@@ -25,6 +25,8 @@ class FormStateStore extends ReduceStore {
         var newIndex = state - 1;
         if (!(newIndex >= 0)) return state;
         return newIndex
+      case ActionTypes.TO_STEP:
+        return action.stepIndex;
       default:
         return state;
     }

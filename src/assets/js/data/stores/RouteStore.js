@@ -65,6 +65,8 @@ class RouteStore extends ReduceStore {
         }
       case ActionTypes.DELETE_ROUTE:
         return state.delete(action.id);
+      case ActionTypes.DELETE_ALL_ROUTES:
+        return state.clear();
       default:
         return state;
     }

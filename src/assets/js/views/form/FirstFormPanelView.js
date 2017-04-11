@@ -11,8 +11,12 @@ function FirstFormPanelView(props) {
   return (
     <div>
       <Panel className='form-panel'>
-        <h2>First step: add components to the map</h2>
-        <RouteInputsContainer {...props} />
+        <div className='view-block'>
+          <h2>First step: add components to the map</h2>
+        </div>
+        <div id='route-inputs-container'>
+          <RouteInputsContainer {...props} />
+        </div>
         <GeodesicInputsContainer {...props} />
         <PointInputsContainer {...props} />
         <TitleInputContainer {...props} />

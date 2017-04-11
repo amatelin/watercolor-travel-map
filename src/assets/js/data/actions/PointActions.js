@@ -15,6 +15,11 @@ const PointActions = {
       id: id
     });
   },
+  deleteAllPoints() {
+    Dispatcher.dispatch({
+      type: ActionTypes.DELETE_ALL_POINTS
+    });
+  },
   startEditPoint(id) {
     Dispatcher.dispatch({
       type: ActionTypes.START_EDIT_POINT,

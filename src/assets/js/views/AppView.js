@@ -6,10 +6,12 @@ import FormContainer from '../containers/form/FormContainer';
 import Footer from './components/Footer';
 import Header from './components/Header'
 import Map from '../utils/Map';
-
+import Tour from '../utils/Tour';
 
 function AppView(props) {
   Map.addListener();
+  Tour.addListeners();
+
   return (
     <div>
       <Header />
@@ -19,7 +21,7 @@ function AppView(props) {
             <FormContainer {...props} />
           </Col>
 
-          <Col id='map-wrapper' md={8} sm={12}>
+          <Col id='map-wrapper' className='view-block' md={8} sm={12}>
             <div id='map-container' className='iframe-container'></div>
           </Col>
         </Row>

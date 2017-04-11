@@ -158,7 +158,7 @@ function PointInputsComponent(props) {
             />
 
   return (
-    <Col lg={12} md={12} sm={12} xs={12}>
+    <Col lg={12} md={12} sm={12} xs={12} className='view-block' id={'point-input-' + props.type}>
       <Col lg={6} md={8} sm={12} xs={12}>
         <AddButton class='btn-block' disabled={(alreadyFilled || draftOn)} onClick={onOpenPointDraft} text={POINTS_TITLES[props.type]} />
       </Col>
@@ -196,16 +196,15 @@ function PointInputs(props) {
 
   return (
     <div>
-      <Col md={12} className='vertical-align-middle'>
+      <Col md={12} className='vertical-align-middle view-block'>
           <h3 className='pull-left'>Points {'\u00a0'}</h3>
           <OverlayTrigger placement="right" overlay={popover}>
             <Glyphicon glyph='question-sign'/>
           </OverlayTrigger>
       </Col>
-        <PointInputsComponent type='startpoint' {...props}/>
-        <PointInputsComponent type='endpoint' {...props}/>
-        <PointInputsComponent type='waypoint' {...props}/>
-
+      <PointInputsComponent type='startpoint' {...props}/>
+      <PointInputsComponent type='endpoint' {...props}/>
+      <PointInputsComponent type='waypoint' {...props}/>
     </div>
   )
 }

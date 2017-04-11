@@ -4,7 +4,7 @@ import React from 'react';
 
 function Footer(props) {
   return (
-    <footer className='footer'>
+    <footer className='footer view-block'>
         <div className="container text-center">
           <div className='credit'>
             <p className="text-muted">

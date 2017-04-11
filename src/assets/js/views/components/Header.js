@@ -13,7 +13,7 @@ function GithubMark() {
 
 function Header(props) {
   return (
-    <Navbar>
+    <Navbar className='view-block'>
       <Navbar.Header>
         <Navbar.Brand>
           Watercolor travel map creator

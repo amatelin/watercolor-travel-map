@@ -4,6 +4,7 @@ export default keyMirror({
   // FormState
   TO_NEXT_STEP: null,
   TO_PREVIOUS_STEP: null,
+  TO_STEP: null, 
 
   // Route
   ADD_ROUTE: null,
@@ -11,6 +12,7 @@ export default keyMirror({
   START_EDIT_ROUTE: null,
   EDIT_ROUTE: null,
   DELETE_ROUTE: null,
+  DELETE_ALL_ROUTES: null,
 
   OPEN_ROUTE_DRAFT: null,
   CLOSE_ROUTE_DRAFT: null,
@@ -34,6 +36,7 @@ export default keyMirror({
   START_EDIT_GEODESIC: null,
   EDIT_GEODESIC: null,
   DELETE_GEODESIC: null,
+  DELETE_ALL_GEODESICS: null,
 
   OPEN_GEODESIC_DRAFT: null,
   CLOSE_GEODESIC_DRAFT: null,
@@ -45,6 +48,7 @@ export default keyMirror({
   START_EDIT_POINT: null,
   EDIT_POINT: null,
   DELETE_POINT: null,
+  DELETE_ALL_POINTS: null,
 
   OPEN_POINT_DRAFT: null,
   CLOSE_POINT_DRAFT: null,
