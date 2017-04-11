@@ -2,9 +2,10 @@
 
 @import "normalize";
 
+@import "bootswatch/lumen/_variables.scss";
 @import "bootstrap/assets/stylesheets/_bootstrap.scss";
+@import "bootswatch/lumen/_bootswatch.scss";
 
-//@import 'react-select/dist/react-select.css';
 @import 'react-select/scss/default.scss';
 @import 'react-select/scss/components.scss';
 @import 'react-select/scss/control.scss';

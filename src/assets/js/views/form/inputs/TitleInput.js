@@ -20,7 +20,7 @@ function TitleDraftInputComponent(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col md={4}>
+        <Col md={6}>
           <FormGroup controlId="titleInput"
           validationState={props.draft.validationError}>
             <ControlLabel>Title</ControlLabel>
@@ -77,14 +77,19 @@ function TitleInputComponent(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col lg={5} md={12} sm={6} xs={6}>
+        <Col lg={6} md={12} sm={6} xs={6}>
           {(isEdited &&
             <Col lg={6} md={12} sm={6} xs={12}>
               <SaveButton onClick={onSaveTitle} />
             </Col>
           )}
-          <Col lg={6} md={12} sm={6} xs={12}>
-            <CancelButton onClick={onDeleteTitle} />
+          {(!isEdited) &&
+            <Col lg={4} md={12} sm={6} xs={12}>
+              <EditButton class='btn-block-md' onClick={onStartEditTitle} />
+            </Col>
+          }
+          <Col lg={4} md={12} sm={6} xs={12}>
+            <DeleteButton onClick={onDeleteTitle} />
           </Col>
         </Col>
       </Col>

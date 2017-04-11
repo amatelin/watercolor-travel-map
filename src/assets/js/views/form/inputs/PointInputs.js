@@ -164,7 +164,7 @@ function PointInputsComponent(props) {
       </Col>
       {draftOn ? input : null }
 
-      {points.map(point => (
+      {points.reverse().map(point => (
             <PointInput
             key={point.id}
             pointIndex={_local_counter++}

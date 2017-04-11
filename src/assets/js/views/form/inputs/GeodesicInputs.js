@@ -157,7 +157,7 @@ function GeodesicInputsComponent(props) {
       </Col>
       {draftOn ? input : null }
 
-      {geodesics.map(geodesic => (
+      {geodesics.reverse().map(geodesic => (
             <GeodesicInput
             key={geodesic.id}
             geodesicIndex={_local_counter++}

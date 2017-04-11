@@ -8,7 +8,7 @@ function AddButton(props) {
 
   return (
     <div>
-      <Button className={props.class} disabled={state} onClick={props.onClick}><Glyphicon glyph="plus" /> Add {props.text}</Button>
+      <Button className={props.class} disabled={state} onClick={props.onClick}><Glyphicon glyph="plus" /> {props.text}</Button>
     </div>
   )
 }

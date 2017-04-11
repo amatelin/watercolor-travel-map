@@ -20,10 +20,10 @@ function WaypointDraftInput(props) {
   return (
     <div>
       <Col md={12} className='vertical-align-middle'>
-        <Col lg={4} md={6} sm={6} xs={6}>
+        <Col lg={6} md={6} sm={6} xs={6}>
           <FormGroup controlId="waypointInput"
             validationState={props.draft.validationError}>
-            <ControlLabel>Location</ControlLabel>
+            <ControlLabel>Waypoint location</ControlLabel>
             <FormControl
               inputRef={(ref) => {addressInput = ref}}
               onKeyDown={onKeyDown}
@@ -33,7 +33,7 @@ function WaypointDraftInput(props) {
               type='text'></FormControl>
           </FormGroup>
         </Col>
-        <Col lg={5} md={12} sm={6} xs={6}>
+        <Col lg={6} md={12} sm={6} xs={6}>
           <Col lg={6} md={12} sm={6} xs={12}>
             <SaveButton class='btn-block-md' onClick={onAddWaypoint} />
           </Col>
@@ -65,15 +65,15 @@ function WaypointInput(props) {
   if (isEdited && waypointEdited) validationError = waypointEdited.validationError
   return (
     <div>
-      <Col md={12}>
-        <p>Waypoint {props.waypointIndex}</p>
-      </Col>
       <Col md={12} className='vertical-align-middle'>
-        <Col lg={4} md={6} sm={6} xs={6}>
+        <Col lg={1} md={1} sm={1} xs={1}>
+          <p><strong>{props.waypointIndex}</strong></p>
+        </Col>
+        <Col lg={6} md={6} sm={6} xs={6}>
           <FormGroup controlId="waypointInput"
             validationState={validationError}>
             {(props.waypointIndex === 1) &&
-              <ControlLabel>Location</ControlLabel>
+              <ControlLabel>Waypoint location</ControlLabel>
             }
             <FormControl
               inputRef={(ref) => {addressInput = ref}}
@@ -87,7 +87,7 @@ function WaypointInput(props) {
               ></FormControl>
           </FormGroup>
         </Col>
-        <Col lg={5} md={12} sm={6} xs={6}>
+        <Col lg={6} md={12} sm={6} xs={6}>
           {(isEdited) &&
             <Col lg={6} md={12} sm={6} xs={12}>
               <SaveButton class='btn-block-md' onClick={onSaveWaypoint} />
@@ -125,7 +125,6 @@ function WaypointInputs(props) {
 
   return (
     <div>
-      <Col md={12}><h3>Waypoints</h3></Col>
       <Col md={12}>
       {input}
       {routeWaypoints.map(waypoint => (

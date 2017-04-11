@@ -166,7 +166,7 @@ function RouteInputsComponent(props) {
       </Col>
       {draftOn ? input : null }
 
-      {routes.map(route => (
+      {routes.reverse().map(route => (
             <RouteInput
             key={route.id}
             routeIndex={_local_counter++}

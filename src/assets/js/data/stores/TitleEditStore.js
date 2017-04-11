@@ -24,6 +24,8 @@ class TitleEditStore extends ReduceStore {
         else return {
           validationError: action.validationError
         }
+      case ActionTypes.DELETE_TITLE:
+        return false;
       default:
         return state;
     }
