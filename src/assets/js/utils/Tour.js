@@ -34,9 +34,9 @@ Tour.addListeners = function() {
 
 Tour.addStep('first-demo-step', {
   title: 'Welcome to the Watercolor map creator!',
-  text: "<p>So you want to show your friends the extent of your recent travels</p>\
-  <p>Just give us a few information about your journey and a beautiful map\
-  will be generated just for you! You can then save the map as an image.</p> \
+  text: "<p>This tool will help you create a travel map that you will ultimately be able to download as an image file.</p>\
+  <p>Just give it some data about your journey and a beautiful customizable map\
+  will be generated just for you!</p> \
   <p>Let's see how.</p>",
   buttons: [
     {text: 'Cancel',
@@ -50,7 +50,7 @@ Tour.addStep('first-demo-step', {
 
 Tour.addStep('second-step-demo', {
   title: 'How it works',
-  text: "<p>Start by adding the elements that will be drawn on the map</p>\
+  text: "<p>Start by adding the elements that will be drawn on the map.</p>\
         <p>Let's say that your journey is defined as so:</p>\
         <ul>\
           <li>You left Paris to cycle to Berlin. On the way you went through Bruxelles.</li>\
@@ -96,7 +96,7 @@ const onFourthStep = () => {
 }
 Tour.addStep('fourth-step-demo', {
   title: 'Setting up route parameters',
-  text: "<p>This is where we add the parameters of our the first leg of our journey.\
+  text: "<p>This is where we add the parameters of the first leg of our journey.\
           The resulting path will be drawn following the shortest route found between \
           these two points\
         </p>\
@@ -220,7 +220,7 @@ const onEigthStep = () => {
 Tour.addStep('eigth-step-demo', {
   title: 'Adding a train route',
   text: "<p>You can now add your train ride between Berlin and Moscow.\
-        </p>The process is the same for any type of routes.</p>",
+</p>The process is the same for every kind of route.</p>",
   attachTo: {element:'#route-input-train', on:'right'},
   buttons: [
     {text: 'Previous',
@@ -273,8 +273,8 @@ const onTenthStep = () => {
 Tour.addStep('tenth-step-demo', {
   title: 'Adding a new geodesic',
   text: "<p>Let's add your flight between Moscow and Istanbul.</p>\
-        <p>A geodesic is the shortest path between two path on a curved plane.\
-        We use it to represent direct links between two places.\
+        <p>A geodesic is the shortest path between two points on a curved plane.</p>\
+        <p>We use it to represent direct links between two places.\
         </p> ",
   attachTo: {element:'#geodesic-input-flight', on:'right'},
   buttons: [
@@ -298,7 +298,7 @@ const onEleventhStep = () => {
 
 Tour.addStep('eleventh-step-demo', {
   title: 'Adding a new geodesic',
-  text: "<p>The process is in all ways similar to the way we added the route, except\
+  text: "<p>The process is completely similar to the way we added the route, except\
     that no waypoint is allowed.\
         </p>",
   attachTo: {element:'#geodesic-input-flight', on:'right'},
@@ -378,7 +378,7 @@ const onFourteenthStep = () => {
 
 Tour.addStep('fourteenth-step-demo', {
   title: 'Adding a new arrival point',
-  text: "<p>And we do the same thing adding an arrival marker on Istanbul.\
+  text: "<p>We do the same thing adding an arrival marker on Istanbul.\
         </p> ",
   attachTo: {element:'#point-input-endpoint', on:'right'},
   buttons: [
@@ -466,9 +466,9 @@ const onEighteenthStep = () => {
 
 Tour.addStep('eighteenth-step-demo', {
   title: 'Generate the map',
-  text: "<p>The different elements we set-up during the next step.\
+  text: "<p>The different elements we set-up during the next step\
         will now be drawn on the map, using the colors and line types \
-        chosen in this section</p>",
+        chosen in this section.</p>",
   attachTo: {element:'#generate-map-button-container', on:'right'},
   buttons: [
     {text: 'Previous',
@@ -490,7 +490,8 @@ const onNineteenthStep = () => {
 
 Tour.addStep('nineteenth-step-demo', {
   title: 'Adjusting the zoom level',
-  text: "<p>The map is now ready. Adjust the zoom level to and center the map \
+  text: "<p>The map is now ready.</p>\
+        <p>Adjust the zoom level to and center the map \
         according to the end result you are looking for.</p>",
   attachTo: {element:'#map-wrapper', on:'left'},
   buttons: [
@@ -512,7 +513,7 @@ const onTwentiethStep = () => {
 
 Tour.addStep('twentieth-step-demo', {
   title: 'Downloading the map',
-  text: "<p>When you are satisfied with the layout of your map, download the image as a .png</p>\
+  text: "<p>When you are satisfied with the layout of your map, download the image as a .png file.</p>\
         <p>That's it!</p>",
   attachTo: {element:'#download-button-container', on:'bottom'},
   buttons: [
