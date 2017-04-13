@@ -4,7 +4,7 @@ export default keyMirror({
   // FormState
   TO_NEXT_STEP: null,
   TO_PREVIOUS_STEP: null,
-  TO_STEP: null, 
+  TO_STEP: null,
 
   // Route
   ADD_ROUTE: null,
@@ -72,4 +72,7 @@ export default keyMirror({
   // Map
   TOGGLE_LOADER: null,
   TOGGLE_MAGIC_OPTION: null,
+
+  // Errors
+  THROW_ERROR: null,
 });

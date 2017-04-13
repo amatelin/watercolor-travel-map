@@ -9,6 +9,7 @@ import TitleStore from '../../data/stores/TitleStore';
 import WaypointStore from '../../data/stores/WaypointStore';
 import GraphicStore from '../../data/stores/GraphicStore';
 import FormStateActions from '../../data/actions/FormStateActions';
+import MapActions from '../../data/actions/MapActions';
 
 function getStores() {
   return [
@@ -32,6 +33,7 @@ function getState() {
 
     routesWithWaypoints: RouteStore.withWaypoints,
     onNextStep: FormStateActions.toNextStep,
+    onGenerateMap: MapActions.generateMap
   }
 }
 

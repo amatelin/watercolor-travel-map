@@ -2,12 +2,11 @@
 
 import React from 'react';
 import {Col, Button, Glyphicon} from 'react-bootstrap/lib';
-import Map from '../../../utils/Map';
 
 function GenerateMapButton(props) {
   const {points, routes, routesWithWaypoints, title, waypoints, geodesics, graphicOptions} = props;
   const onGenerateMap = () => {
-    Map.generateMap({
+    props.onGenerateMap({
       points: points,
       routes: routes,
       title: title,

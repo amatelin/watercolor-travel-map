@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 require('./tile.stamen.js');
 import FileSaver from 'file-saver';
 import Counter from './Counter';
+import ErrorActions from '../data/actions/ErrorActions'
 
 const lineSymbols = {
       plainline: {
@@ -113,6 +114,18 @@ const Map = {
     map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
     map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
     directionsDisplay.setMap(map);
+  },
+
+  processLegend() {
+    var legendContainer = document.createElement('div');
+    legendContainer.setAttribute('id', 'map-legend');
+
+    legendOptions.registered.map(routeType => {
+      var legendOption = this.generateLegend(legendOptions.options[routeType])
+      legendContainer.appendChild(legendOption)
+    })
+
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendContainer);
   },
 
   generateLegend(options) {
@@ -309,11 +322,16 @@ const Map = {
     };
 
     directionsService.route(request, function(response, status) {
-      if (status == google.maps.DirectionsStatus.OK) {
-        that.drawRoute(options.options, response);
-      }
-      else {
-        alert("Directions Request from " + departureAddress + " to " + destination + " failed: " + status);
+      console.log(response.status)
+      switch(response.status) {
+        case google.maps.DirectionsStatus.OK:
+          return that.drawRoute(options.options, response);
+        case google.maps.DirectionsStatus.NOT_FOUND:
+          return ErrorActions.throwError('ERROR_DIRECTION_NO_RESULTS', {type: routeType + ' route(s)'});
+        case google.maps.DirectionsStatus.ZERO_RESULTS:
+            return ErrorActions.throwError('ERROR_DIRECTION_NO_RESULTS', {type: routeType + ' route(s)'});
+        default:
+          return ErrorActions.throwError('ERROR_DIRECTION_SERVICE', {});
       }
     });
 
@@ -336,10 +354,28 @@ const Map = {
 
     var coordinates = []
     this.geoCodeAddress(geodesic.departureAddress)
+    .catch(error => {
+      ErrorActions.throwError('ERROR_GEOCODING_SERVICE', {});
+    })
     .then(firstResponse => {
+      if (firstResponse.json.status === 'ZERO_RESULTS') {
+        var errorInfo = {
+          type: 'geodesics'
+        }
+        return ErrorActions.throwError('ERROR_GEOCODING_NO_RESULTS', errorInfo);
+      }
       coordinates.push(firstResponse.json.results[0].geometry.location);
       this.geoCodeAddress(geodesic.arrivalAddress)
+    .catch(error => {
+      ErrorActions.throwError('ERROR_GEOCODING_SERVICE', {});
+    })
     .then(secondResponse => {
+      if (secondResponse.json.status === 'ZERO_RESULTS') {
+        var errorInfo = {
+          type: 'geodesics'
+        }
+        return ErrorActions.throwError('ERROR_GEOCODING_NO_RESULTS', errorInfo);
+      }
       coordinates.push(secondResponse.json.results[0].geometry.location)
       this.drawGeodesic(options.options, coordinates)
     });
@@ -350,7 +386,16 @@ const Map = {
   processPoint(point) {
     var coordinates;
     this.geoCodeAddress(point.address)
+    .catch(error => {
+
+    })
     .then(response => {
+      if (response.json.status === 'ZERO_RESULTS') {
+        var errorInfo = {
+          type: 'points'
+        }
+        return ErrorActions.throwError('ERROR_GEOCODING_NO_RESULTS', errorInfo);
+      }
       var coordinates = response.json.results[0].geometry.location;
       this.drawPoint(coordinates, point.title, point.type)
     })
@@ -408,15 +453,10 @@ const Map = {
     // Draw points
     data.points.map(point => this.processPoint(point));
 
-    var legendContainer = document.createElement('div');
-    legendContainer.setAttribute('id', 'map-legend');
-    legendOptions.registered.map(routeType => {
-      var legendOption = this.generateLegend(legendOptions.options[routeType])
-      legendContainer.appendChild(legendOption)
-    })
+    // Draw legend
+    this.processLegend(legendOptions);
 
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendContainer);
-
+    // Draw title
     if (data.title) this.addTitle(data.title);
   },
 

@@ -3,9 +3,9 @@
 import Dispatcher from '../dispatcher/Dispatcher';
 import ActionTypes from '../constants/ActionTypes';
 import Geodesic from '../models/Geodesic';
-import {ReduceStore} from 'flux/utils'
-import Counter from '../../utils/Counter'
-import Immutable from 'immutable'
+import {ReduceStore} from 'flux/utils';
+import Counter from '../../utils/Counter';
+import Immutable from 'immutable';
 
 class GeodesicStore extends ReduceStore {
   constructor() {

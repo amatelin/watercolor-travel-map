@@ -10,7 +10,7 @@ import Tour from '../utils/Tour';
 
 function AppView(props) {
   Map.addListener();
-  Tour.addListeners();
+  if (!JSON.parse(localStorage.getItem('AppOptions.doNotShowDemo'))) Tour.addListeners();
 
   return (
     <div>

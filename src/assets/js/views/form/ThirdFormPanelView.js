@@ -1,14 +1,21 @@
 'use strict'
 
 import React from 'react';
-import {Row, Col, Button, Panel, FormGroup, Checkbox, Popover, OverlayTrigger, Glyphicon} from 'react-bootstrap/lib';
+import {Row, Col, Button, Panel, FormGroup, Checkbox, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap/lib';
 import Loader from './components/Loader'
 import Map from '../../utils/Map';
+import Errors from '../../utils/Errors';
+
 
 function ThirdFormPanelView(props) {
   const {mapOptions, onToggleLoader} = props;
   const downloadImage = () => Map.downloadImage(mapOptions, onToggleLoader);
   const onToggleMagicOption = (event) => props.onToggleMagicOption();
+  var alertsOn = true;
+  const hideAlerts = () => {
+    var container = document.getElementById('error-container');
+    container.setAttribute('style', 'display:none');
+  }
 
   var popover = (
     <Popover
@@ -27,6 +34,20 @@ function ThirdFormPanelView(props) {
   return (
     <div>
       <Panel className='form-panel'>
+        <Col lg={12} md={12} sm={12} xs={12}>
+          {alertsOn &&
+            <Alert id='error-container' bsStyle="danger" onDismiss={hideAlerts}>
+              <h4>Oh snap! You got an error!</h4>
+              {props.errors.map(error => {
+                return(
+                  <p>
+                    {Errors[error.type].getText(Errors[error.type].text, (error.data.type ? error.data.type : ''))}
+                  </p>
+                )
+              })}
+            </Alert>
+          }
+        </Col>
         <Col md={12} className='vertical-align-middle view-block'>
             <h2 className='pull-left'>Get your map {'\u00a0'}</h2>
             <OverlayTrigger placement="right" overlay={popover}>

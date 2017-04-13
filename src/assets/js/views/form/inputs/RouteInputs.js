@@ -160,7 +160,7 @@ function RouteInputsComponent(props) {
             />
 
   return (
-    <Col lg={12} md={12} sm={12} xs={12} className='view-block' id={'route-input-'+props.type}>
+    <Col bsStyle='danger' lg={12} md={12} sm={12} xs={12} className='view-block' id={'route-input-'+props.type}>
       <Col lg={6} md={8} sm={12} xs={12}>
         <AddButton class='btn-block' disabled={draftOn} onClick={onOpenRouteDraft} text={props.type} />
       </Col>

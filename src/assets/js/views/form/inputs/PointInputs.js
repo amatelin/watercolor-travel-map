@@ -187,10 +187,10 @@ function PointInputs(props) {
     positionTop={50}
     title="Help: adding points"
   >
-    <p>The start and arrival points will represented respectively as a green and red cross on the map.</p>
+    <p>The starting and arrival points will be represented respectively as a green and red cross on the map.</p>
     <p>The waypoints will be represented as a yellow dots.</p>
     <p>A title can be set for any point in which case it will appear above the point.</p>
-    <p>Only one start and arrival points are allowed. Any number of waypoint can be added.</p>
+    <p>Only one starting and arrival points are allowed. Any number of waypoints can be added.</p>
   </Popover>
   )
 

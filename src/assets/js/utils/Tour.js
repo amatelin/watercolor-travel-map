@@ -20,17 +20,27 @@ let Tour = new Shepherd.Tour({
   }
 });
 
+const onKeyDown = (event) => {
+  if (event.keyCode === ESCAPE_KEY_CODE) Tour.cancel();
+  if (event.keyCode === LEFT_ARROW_KEY_CODE) Tour.back();
+  if (event.keyCode === RIGHT_ARROW_KEY_CODE) Tour.next();
+}
+
+const onDoNotShowClick = () => {
+  localStorage.setItem('AppOptions.doNotShowDemo', true);
+  Tour.cancel();
+}
+
 Tour.addListeners = function() {
   const start = () => {this.start()};
   window.onload = start;
 
-  const onKeyDown = (event) => {
-    if (event.keyCode === ESCAPE_KEY_CODE) Tour.cancel();
-    if (event.keyCode === LEFT_ARROW_KEY_CODE) Tour.back();
-    if (event.keyCode === RIGHT_ARROW_KEY_CODE) Tour.next();
-  }
   document.addEventListener("keydown", onKeyDown, false);
 };
+
+Tour.removeListeners = function() {
+  document.removeEventListener('keydown', onKeyDown, false)
+}
 
 Tour.addStep('first-demo-step', {
   title: 'Welcome to the Watercolor map creator!',
@@ -39,8 +49,8 @@ Tour.addStep('first-demo-step', {
   will be generated just for you!</p> \
   <p>Let's see how.</p>",
   buttons: [
-    {text: 'Cancel',
-    action: Tour.cancel,
+    {text: 'Do not show this again',
+    action: onDoNotShowClick,
     classes: 'btn btn-default'},
     {text: 'Next',
     action: Tour.next,
@@ -538,6 +548,7 @@ Tour.on('complete', function() {
   TitleActions.deleteTitle();
   FormStateActions.toStep(0);
   Map.initialize();
+  this.removeListeners();
 });
 
 Tour.on('cancel', function() {
@@ -549,7 +560,7 @@ Tour.on('cancel', function() {
   TitleActions.deleteTitle();
   FormStateActions.toStep(0);
   Map.initialize();
+  this.removeListeners();
 });
-
 
 export default Tour;
