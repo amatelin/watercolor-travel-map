@@ -35,7 +35,7 @@ function ThirdFormPanelView(props) {
     <div>
       <Panel className='form-panel'>
         <Col lg={12} md={12} sm={12} xs={12}>
-          {alertsOn &&
+          {(alertsOn&&props.errors.size>0) &&
             <Alert id='error-container' bsStyle="danger" onDismiss={hideAlerts}>
               <h4>Oh snap! You got an error!</h4>
               {props.errors.map(error => {
