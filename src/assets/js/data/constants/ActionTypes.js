@@ -24,6 +24,7 @@ export default keyMirror({
   START_EDIT_WAYPOINT: null,
   EDIT_WAYPOINT: null,
   DELETE_WAYPOINT: null,
+  DELETE_ALL_WAYPOINTS: null,
   REORDER_WAYPOINT: null,
 
   OPEN_WAYPOINT_DRAFT: null,
