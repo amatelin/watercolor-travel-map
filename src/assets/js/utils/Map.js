@@ -322,14 +322,16 @@ const Map = {
     };
 
     directionsService.route(request, function(response, status) {
-      console.log(response.status)
-      switch(response.status) {
+      console.log(status);
+      switch(status) {
         case google.maps.DirectionsStatus.OK:
           return that.drawRoute(options.options, response);
         case google.maps.DirectionsStatus.NOT_FOUND:
           return ErrorActions.throwError('ERROR_DIRECTION_NO_RESULTS', {type: routeType + ' route(s)'});
         case google.maps.DirectionsStatus.ZERO_RESULTS:
-            return ErrorActions.throwError('ERROR_DIRECTION_NO_RESULTS', {type: routeType + ' route(s)'});
+          return ErrorActions.throwError('ERROR_DIRECTION_NO_RESULTS', {type: routeType + ' route(s)'});
+        case google.maps.DirectionsStatus.OVER_QUERY_LIMIT:
+          return ErrorActions.throwError('ERROR_QUERY_LIMIT', {})
         default:
           return ErrorActions.throwError('ERROR_DIRECTION_SERVICE', {});
       }
@@ -438,13 +440,22 @@ const Map = {
     // link waypoints with corresponding route
     const routesWithWaypoints = data.routesWithWaypoints(data.routes, data.waypoints);
 
+    var counter = 0;
     routesWithWaypoints.map(route => {
+      counter++
+      var timeOut = 0;
       const origin = route.departureAddress;
       const destination = route.arrivalAddress;
       const routeType = route.type;
       var waypoints = route.waypoints.toList().toJS();
 
-      this.processRoute(this, routeType, origin, destination, waypoints);
+      if (counter >= 10) {
+        timeOut = 1000*(counter-9);
+      }
+
+      const func = () => this.processRoute(this, routeType, origin, destination, waypoints);
+      window.setTimeout(func, timeOut);
+
     });
 
     // Draw geodesics

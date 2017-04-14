@@ -8,7 +8,7 @@ function Loader(props) {
   return (
     <div id='loader-container'>
       <Col md={12}>
-        <h4 className='text-center'>Download will beggin shortly...</h4>
+        <h4 className='text-center'>Download will begin shortly...</h4>
       </Col>
       <Col md={12}>
         <div className="showbox">
