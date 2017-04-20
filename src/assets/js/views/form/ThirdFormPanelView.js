@@ -16,6 +16,7 @@ function ThirdFormPanelView(props) {
     var container = document.getElementById('error-container');
     container.setAttribute('style', 'display:none');
   }
+  var queryErrorHandled = false;
 
   var popover = (
     <Popover
@@ -39,6 +40,8 @@ function ThirdFormPanelView(props) {
             <Alert id='error-container' bsStyle="danger" onDismiss={hideAlerts}>
               <h4>Oh snap! You got an error!</h4>
               {props.errors.map(error => {
+                if (error.type === 'ERROR_QUERY_LIMIT' && queryErrorHandled) return;
+                if (error.type === 'ERROR_QUERY_LIMIT') queryErrorHandled = true;
                 return(
                   <p>
                     {Errors[error.type].getText(Errors[error.type].text, (error.data.type ? error.data.type : ''))}

@@ -120,6 +120,7 @@ const Map = {
     var legendContainer = document.createElement('div');
     legendContainer.setAttribute('id', 'map-legend');
 
+    console.log(legendOptions)
     legendOptions.registered.map(routeType => {
       var legendOption = this.generateLegend(legendOptions.options[routeType])
       legendContainer.appendChild(legendOption)
@@ -291,7 +292,7 @@ const Map = {
     geodesic.setMap(map);
   },
 
-  processRoute(that, routeType, departureAddress, arrivalAddress, waypoints) {
+  preProcessRoute(routeType) {
     var options = graphicOptions.find(option => {
       return option.inputType == routeType;
     });
@@ -305,6 +306,12 @@ const Map = {
         opacity: options.options.color.alpha
       };
     }
+  },
+
+  processRoute(that, routeType, departureAddress, arrivalAddress, waypoints) {
+    var options = graphicOptions.find(option => {
+      return option.inputType == routeType;
+    });
 
     var waypts = [];
     for (var i = 0; i < waypoints.length; i++) {
@@ -441,7 +448,9 @@ const Map = {
     const routesWithWaypoints = data.routesWithWaypoints(data.routes, data.waypoints);
 
     var counter = 0;
+
     routesWithWaypoints.map(route => {
+
       counter++
       var timeOut = 0;
       const origin = route.departureAddress;
@@ -452,6 +461,8 @@ const Map = {
       if (counter >= 10) {
         timeOut = 1000*(counter-9);
       }
+
+      this.preProcessRoute(routeType);
 
       const func = () => this.processRoute(this, routeType, origin, destination, waypoints);
       window.setTimeout(func, timeOut);
@@ -465,7 +476,7 @@ const Map = {
     data.points.map(point => this.processPoint(point));
 
     // Draw legend
-    this.processLegend(legendOptions);
+    this.processLegend();
 
     // Draw title
     if (data.title) this.addTitle(data.title);
